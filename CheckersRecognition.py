@@ -1,6 +1,38 @@
 import cv2
 import numpy as np
 
+
+def check_vertex_list(vertex_list):
+    if vertex_list[0][0] <= vertex_list[1][0] and vertex_list[2][0] >= vertex_list[3][0]:
+        return vertex_list
+
+    elif vertex_list[0][0] >= vertex_list[1][0] and vertex_list[2][0] <= vertex_list[3][0]:
+        vertex_list[0][0], vertex_list[1][0] = vertex_list[1][0], vertex_list[0][0]
+        vertex_list[2][0], vertex_list[3][0] = vertex_list[3][0], vertex_list[2][0]
+        return vertex_list
+
+    elif vertex_list[0][0] <= vertex_list[1][0] and vertex_list[2][0] <= vertex_list[3][0]:
+        vertex_list[2][0], vertex_list[3][0] = vertex_list[3][0], vertex_list[2][0]
+        return vertex_list
+
+    elif vertex_list[0][0] >= vertex_list[1][0] and vertex_list[2][0] >= vertex_list[3][0]:
+        vertex_list[0][0], vertex_list[1][0] = vertex_list[1][0], vertex_list[0][0]
+        return vertex_list
+
+
+def increase_board_area(list):
+    list[0][0] -= 10
+    list[0][1] -= 10
+    list[1][0] += 10
+    list[1][1] -= 10
+    list[2][0] += 10
+    list[2][1] += 10
+    list[3][0] -= 10
+    list[3][1] += 10
+
+    return list
+
+
 #testowanie dla roznych kolorow prostokatow
 # lower_red = np.array([0, 100, 100])
 # upper_red = np.array([10, 255, 255])
@@ -8,7 +40,8 @@ import numpy as np
 # lower_yellow = np.array([20, 100, 100])
 # upper_yellow = np.array([30, 255, 255])
 
-lower_blue = np.array([90, 50, 50])
+
+lower_blue = np.array([100, 70, 70])  # 100,50,50
 upper_blue = np.array([130, 255, 255])
 
 #wczytanie zdjecia
@@ -27,12 +60,13 @@ hsv = cv2.cvtColor(res, cv2.COLOR_BGR2HSV)
 mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
 #usuniecie zle wykrytych pojdynczych pikseli
-kernel = np.ones((5, 5), np.uint8)
+kernel = np.ones((6, 6), np.uint8)
 erosion = cv2.erode(mask, kernel, iterations=1)
 dilation = cv2.dilate(erosion, kernel, iterations=1)
 
 #znalezienie konturow
 image, contours, hierarchy = cv2.findContours(dilation, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
 #rysowanie konturow
 img2 = cv2.drawContours(image, contours, -1, (128, 255, 187), 3)
 
@@ -47,9 +81,17 @@ for i in contours:
     img2 = cv2.line(img2, (cx, cy), (cx, cy), (128, 255, 187), 5)
     list_of_points.append([cx, cy])
 
-list_of_points.reverse()
 
-pts1 = np.float32([list_of_points[0], list_of_points[1], list_of_points[2], list_of_points[3]])
+list_of_points.reverse()
+print('1. ' + str(list_of_points))
+checked_list_of_points = check_vertex_list(list_of_points)
+print('2. ' + str(checked_list_of_points))
+increased_list_of_points = increase_board_area(checked_list_of_points)
+
+
+pts1 = np.float32([increased_list_of_points[0], increased_list_of_points[1], increased_list_of_points[2],
+                   increased_list_of_points[3]])
+
 pts2 = np.float32([[0, 0], [600, 0], [600, 600], [0, 600]])
 
 #stworzenie macierzy tranformacji perspektywicznej
