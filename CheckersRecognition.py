@@ -20,17 +20,17 @@ def check_vertex_list(vertex_list):
         return vertex_list
 
 
-def increase_board_area(list):
-    list[0][0] -= 10
-    list[0][1] -= 10
-    list[1][0] += 10
-    list[1][1] -= 10
-    list[2][0] += 10
-    list[2][1] += 10
-    list[3][0] -= 10
-    list[3][1] += 10
+def increase_board_area(vertex_list):
+    vertex_list[0][0] -= 10
+    vertex_list[0][1] -= 10
+    vertex_list[1][0] += 10
+    vertex_list[1][1] -= 10
+    vertex_list[2][0] += 10
+    vertex_list[2][1] += 10
+    vertex_list[3][0] -= 10
+    vertex_list[3][1] += 10
 
-    return list
+    return vertex_list
 
 
 #testowanie dla roznych kolorow prostokatow
@@ -105,8 +105,9 @@ dst = cv2.warpPerspective(res, M, (600, 600))
 cv2.imshow("obrazek", dst)
 cv2.waitKey()
 
-dst = cv2.medianBlur(dst, 7)
-gray_img = cv2.cvtColor(dst, cv2.COLOR_BGR2GRAY)
+#dodanie rozmycia zeby lepiej wykrywac kola
+blurred_img = cv2.medianBlur(dst, 7)
+gray_img = cv2.cvtColor(blurred_img, cv2.COLOR_BGR2GRAY)
 
 circles = cv2.HoughCircles(gray_img, cv2.HOUGH_GRADIENT, 1, 20, param1=35, param2=15, minRadius=30, maxRadius=35)  # 20, 25
 if len(circles):
