@@ -45,7 +45,7 @@ lower_blue = np.array([100, 70, 70])  # 100,50,50
 upper_blue = np.array([130, 255, 255])
 
 #wczytanie zdjecia
-img = cv2.imread('zdj/b8.jpeg')
+img = cv2.imread('zdj/b10.jpeg')
 
 #zmniejszenie obrazu
 res = cv2.resize(img, None, fx=0.18, fy=0.18, interpolation=cv2.INTER_CUBIC)
@@ -56,14 +56,14 @@ cv2.waitKey(0)
 #zamiana na HSV
 hsv = cv2.cvtColor(res, cv2.COLOR_BGR2HSV)
 
-cv2.imshow('obrazek', hsv)
-cv2.waitKey(0)
+# cv2.imshow('obrazek', hsv)
+# cv2.waitKey(0)
 
 #stworzenie obrazu binarnego z pikseli z podanego zakresu
 mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
-cv2.imshow('obrazek', mask)
-cv2.waitKey(0)
+# cv2.imshow('obrazek', mask)
+# cv2.waitKey(0)
 
 #usuniecie zle wykrytych pojdynczych pikseli
 kernel = np.ones((6, 6), np.uint8)
@@ -87,8 +87,8 @@ for i in contours:
     img2 = cv2.line(img2, (cx, cy), (cx, cy), (128, 255, 187), 5)
     list_of_points.append([cx, cy])
 
-cv2.imshow('obrazek', img2)
-cv2.waitKey(0)
+# cv2.imshow('obrazek', img2)
+# cv2.waitKey(0)
 
 list_of_points.reverse()
 print('1. ' + str(list_of_points))
@@ -127,7 +127,6 @@ if circles is not None:
         cv2.circle(dst, (i[0], i[1]), i[2], (0, 255, 0), 2)
         # draw the center of the circle
         cv2.circle(dst, (i[0], i[1]), 2, (0, 0, 255), 3)
-
 
 
 cv2.imshow('obrazek', dst)
