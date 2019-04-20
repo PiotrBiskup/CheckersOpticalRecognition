@@ -16,9 +16,22 @@ chessboard.printBoard()
 
 allTiles = []
 allPieces = []
+bigVector = []
+##########################
+##########################
+def CreateTemps(tempboard):                         #magiczna funkcja tworzenia tablic mozliwych ruchow
+    for x in chessboard:
+        tempboard.append(chessboard.gameTiles[x].pieceOnTile.toString())
+    bigVector.append(tempboard)
 
-##########################
-##########################
+def Compare():                                          #mniej magiczna funkcja sprawdzajaca obecny stan z tablicami
+    #obecna = []
+    #for x in chessboard():
+    #    obecna.append(chessboard.gameTiles[x].pieceOnTile.toString())
+    for y in bigVector:
+        if chessboard == y:
+            print("git")
+            break
 
 def ChangePosition(alliance,before,after):
     chessboard.gameTiles[before] = Tile(before, NullPiece())
