@@ -4,6 +4,7 @@ import time
 from Board.Tile import Tile
 from Pieces.Man import Man
 from Pieces.NullPiece import NullPiece
+import Logic.logic as logic
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((600,600))#((600,680))
@@ -17,21 +18,10 @@ chessboard.printBoard()
 allTiles = []
 allPieces = []
 bigVector = []
+wewnetrzne = []
 ##########################
 ##########################
-def CreateTemps(tempboard):                         #magiczna funkcja tworzenia tablic mozliwych ruchow
-    for x in chessboard:
-        tempboard.append(chessboard.gameTiles[x].pieceOnTile.toString())
-    bigVector.append(tempboard)
 
-def Compare():                                          #mniej magiczna funkcja sprawdzajaca obecny stan z tablicami
-    #obecna = []
-    #for x in chessboard():
-    #    obecna.append(chessboard.gameTiles[x].pieceOnTile.toString())
-    for y in bigVector:
-        if chessboard == y:
-            print("git")
-            break
 
 def ChangePosition(alliance,before,after):
     chessboard.gameTiles[before] = Tile(before, NullPiece())
@@ -97,6 +87,29 @@ pygame.display.update()
 time.sleep(2)
 allTiles = []
 allPieces = []
+count=0
+
+###MICHAŁOWE TESTY, Prosze nie usuwac###
+# chessboard.gameTiles[8] = Tile(8, NullPiece())
+# chessboard.gameTiles[10] = Tile(10, Man("White", 10))
+# chessboard.gameTiles[12] = Tile(12, NullPiece())
+# chessboard.gameTiles[14] = Tile(14, NullPiece())
+# chessboard.gameTiles[5] = Tile(5, NullPiece())
+# chessboard.gameTiles[5] = Tile(5, NullPiece())
+# chessboard.gameTiles[3] = Tile(3, NullPiece())
+# drawPieces()
+#
+# logic.mozliwy_ruch(chessboard,wewnetrzne, bigVector)
+# for x in bigVector:
+#    # print(x)
+#     for tiles in range(64):
+#         print('|', end=x[tiles])
+#         count += 1
+#         if count == 8:
+#             print('|', end='\n')
+#             count = 0
+#     print("\n")
+
 
 #chessboard.gameTiles[40] = Tile(40, NullPiece())
 #chessboard.gameTiles[33] = Tile(33, Man("White", 33))
@@ -135,6 +148,8 @@ while not quitGame:
                      (600-text.get_width()//1.5, 680 - text.get_height() * 1.5))
 
     drawPieces()
+
+
 
     if n == 0:
         ChangePosition("White", 44, 37)
