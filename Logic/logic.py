@@ -107,6 +107,7 @@ def mozliwe_bicia(chessboard, wewnetrzne, bigVector):
                         wewnetrzne[x + 7] = '-'
                         wewnetrzne[x+14] = 'M'
                         zaszly_zmiany = 1
+                        wiecej_bic_for_one(bigVector, wewnetrzne,x+14)
                         bigVector.append(wewnetrzne.copy())
                         del wewnetrzne[:]
         elif wewnetrzne[x] == 'M' and (x == 8 or x == 24 or x == 40 or x==1 or x==17 or x==33) and wewnetrzne[x + 9] == 'm' and wewnetrzne[x + 18] == '-':
@@ -114,6 +115,7 @@ def mozliwe_bicia(chessboard, wewnetrzne, bigVector):
                         wewnetrzne[x + 9] = '-'
                         wewnetrzne[x+18]='M'
                         bigVector.append(wewnetrzne.copy())
+                        wiecej_bic_for_one(bigVector, wewnetrzne, x + 18)
                         del wewnetrzne[:]
                         zaszly_zmiany = 1
         elif wewnetrzne[x] == 'M' and (x == 56 or x == 58 or x == 60 or x == 62 or x==49 or x==51 or x==53 or x ==55):
@@ -124,6 +126,7 @@ def mozliwe_bicia(chessboard, wewnetrzne, bigVector):
                             wewnetrzne[x + 9] = '-'
                             wewnetrzne[x + 18] = 'M'
                             bigVector.append(wewnetrzne.copy())
+                            wiecej_bic_for_one(bigVector, wewnetrzne, x + 18)
                             del wewnetrzne[:]
                             for z in range(64):
                                 wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
@@ -131,6 +134,58 @@ def mozliwe_bicia(chessboard, wewnetrzne, bigVector):
                             wewnetrzne[x] = '-'
                             wewnetrzne[x + 7] = '-'
                             wewnetrzne[x + 14] = 'M'
+                            wiecej_bic_for_one(bigVector, wewnetrzne, x + 14)
                             bigVector.append(wewnetrzne.copy())
                             del wewnetrzne[:]
                             zaszly_zmiany = 1
+
+def wiecej_bic_for_one(bigVector, wewnetrzne,x):
+    if wewnetrzne[x] == 'M' and (x == 7 or x == 23 or x == 39 or x == 14 or x == 30 or x == 46) and wewnetrzne[x + 7] == 'm' and wewnetrzne[x + 14] == '-':
+        wewnetrzne[x] = '-'
+        wewnetrzne[x + 7] = '-'
+        wewnetrzne[x + 14] = 'M'
+        wiecej_bic_for_one(bigVector, wewnetrzne, x + 14)
+        bigVector.append(wewnetrzne.copy())
+        del wewnetrzne[:]
+    elif wewnetrzne[x] == 'M' and (x == 8 or x == 24 or x == 40 or x == 1 or x == 17 or x == 33) and wewnetrzne[x + 9] == 'm' and wewnetrzne[x + 18] == '-':
+        wewnetrzne[x] = '-'
+        wewnetrzne[x + 9] = '-'
+        wewnetrzne[x + 18] = 'M'
+        wiecej_bic_for_one(bigVector, wewnetrzne, x + 18)
+        bigVector.append(wewnetrzne.copy())
+        del wewnetrzne[:]
+    elif wewnetrzne[x] == 'M' and (
+            x == 56 or x == 58 or x == 60 or x == 62 or x == 49 or x == 51 or x == 53 or x == 55):
+        print()
+    elif wewnetrzne[x] == 'M':
+        if wewnetrzne[x + 9] == 'm' and wewnetrzne[x + 18] == '-' and wewnetrzne[x + 7] == 'm' and wewnetrzne[x + 14] == '-':
+            wewnetrzne2 = wewnetrzne [:]
+            wewnetrzne[x] = '-'
+            wewnetrzne[x + 9] = '-'
+            wewnetrzne[x + 18] = 'M'
+            wiecej_bic_for_one(bigVector, wewnetrzne, x + 18)
+            bigVector.append(wewnetrzne.copy())
+
+            wewnetrzne2[x] = '-'
+            wewnetrzne2[x + 7] = '-'
+            wewnetrzne2[x + 14] = 'M'
+            wiecej_bic_for_one(bigVector, wewnetrzne2, x + 14)
+            bigVector.append(wewnetrzne2.copy())
+
+        elif wewnetrzne[x + 9] == 'm' and wewnetrzne[x + 18] == '-':
+            wewnetrzne[x] = '-'
+            wewnetrzne[x + 9] = '-'
+            wewnetrzne[x + 18] = 'M'
+            wiecej_bic_for_one(bigVector, wewnetrzne, x + 18)
+            bigVector.append(wewnetrzne.copy())
+            del wewnetrzne[:]
+            # for z in range(64):
+            #     wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+        elif wewnetrzne[x] == 'M' and wewnetrzne[x + 7] == 'm' and wewnetrzne[x + 14] == '-':
+            wewnetrzne[x] = '-'
+            wewnetrzne[x + 7] = '-'
+            wewnetrzne[x + 14] = 'M'
+            wiecej_bic_for_one(bigVector, wewnetrzne, x + 14)
+            bigVector.append(wewnetrzne.copy())
+            del wewnetrzne[:]
+            zaszly_zmiany = 1

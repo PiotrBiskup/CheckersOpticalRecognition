@@ -97,25 +97,28 @@ count=0
 # chessboard.gameTiles[5] = Tile(5, NullPiece())
 # chessboard.gameTiles[5] = Tile(5, NullPiece())
 # chessboard.gameTiles[3] = Tile(3, NullPiece())
-# drawPieces()
-# for x in range(64):
-#     chessboard.gameTiles[x] = Tile(x, NullPiece())
-# print("\n")
-# chessboard.gameTiles[33] = Tile(33, Man("White", 33))
-# chessboard.gameTiles[26] = Tile(26, Man("Black", 26))
-# chessboard.printBoard()
-# print("\n")
-# logic.mozliwe_bicia(chessboard,wewnetrzne, bigVector)
-# logic.mozliwy_ruch(chessboard,wewnetrzne, bigVector)
-# for x in bigVector:
-#    # print(x)
-#     for tiles in range(64):
-#         print('|', end=x[tiles])
-#         count += 1
-#         if count == 8:
-#             print('|', end='\n')
-#             count = 0
-#     print("\n")
+drawPieces()
+for x in range(64):
+    chessboard.gameTiles[x] = Tile(x, NullPiece())
+print("\n")
+chessboard.gameTiles[17] = Tile(17, Man("White", 17))
+chessboard.gameTiles[35] = Tile(35, Man("White", 35))
+chessboard.gameTiles[8] = Tile(8, Man("Black", 8))
+chessboard.gameTiles[33] = Tile(33, Man("White", 33))
+chessboard.gameTiles[53] = Tile(53, Man("White", 53))
+chessboard.printBoard()
+print("\n")
+logic.mozliwe_bicia(chessboard,wewnetrzne, bigVector)
+#logic.mozliwy_ruch(chessboard,wewnetrzne, bigVector)
+for x in bigVector:
+   # print(x)
+    for idx, tiles in enumerate(x):
+        print('|', end=x[idx])
+        count += 1
+        if count == 8:
+            print('|', end='\n')
+            count = 0
+    print("\n")
 
 
 #chessboard.gameTiles[40] = Tile(40, NullPiece())
