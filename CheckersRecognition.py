@@ -121,14 +121,14 @@ def find_checkers(image):
 
     if circles is not None:
         circles = np.uint16(np.around(circles))
-        index = 1
-        for i in circles[0, :]:
-            # print(str(index) + ': ' + str(i))
-            index += 1
-            # draw the outer circle
-            cv2.circle(image, (i[0], i[1]), i[2], (0, 255, 0), 2)
-            # draw the center of the circle
-            cv2.circle(image, (i[0], i[1]), 2, (0, 0, 255), 3)
+        # index = 1
+        # for i in circles[0, :]:
+        #     # print(str(index) + ': ' + str(i))
+        #     index += 1
+        #     # draw the outer circle
+        #     cv2.circle(image, (i[0], i[1]), i[2], (0, 255, 0), 2)
+        #     # draw the center of the circle
+        #     cv2.circle(image, (i[0], i[1]), 2, (0, 0, 255), 3)
 
     # cv2.imshow('obrazek', image)
     # cv2.waitKey(0)
@@ -137,20 +137,78 @@ def find_checkers(image):
     return circles
 
 
-def find_board_squares(image):
+def find_board_squares():
+    x = 24
+    y = 24
+    inc = 69
+    squares_coord = []
 
+    for j in range(0, 8):
+        for i in range(0, 8):
+            squares_coord.append([[x, y], [x + inc, y + inc]])
+            x += inc
+        x = 24
+        y += inc
 
-    cv2.imshow('img', image)
+    # print(squares_cordinates)
+    # for i in squares_cordinates:
+    #     cv2.rectangle(img, (i[0][0], i[0][1]), (i[1][0], i[1][1]), (122, 122, 122), 4)
+    #
+    # cv2.imshow('image', img)
+    # cv2.waitKey()
+    # cv2.destroyAllWindows()
+
+    return squares_coord
+
+def find_colored_checkers(image, checkers, squares):
+    cv2.imshow('obrazek', image)
     cv2.waitKey(0)
+    # lower_black = np.array([0, 0, 0])
+    # upper_black = np.array([180, 200, 30])
+    #
+    # cv2.imshow('obrazek', image)
+    # cv2.waitKey(0)
+    #
+    # # zamiana na HSV
+    # hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    #
+    #
+    # # stworzenie obrazu binarnego z pikseli z podanego zakresu
+    # mask = cv2.inRange(hsv, lower_black, upper_black)
+    #
+    # cv2.imshow('obrazek', mask)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
+
+    gray_scale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    cv2.imshow('obrazek', gray_scale)
+    cv2.waitKey(0)
+
+    ret, th = cv2.threshold(gray_scale, 180, 255, cv2.THRESH_BINARY)
+    cv2.imshow('obrazek', th)
+    cv2.waitKey(0)
+
+    # usuniecie zle wykrytych pojdynczych pikseli
+    kernel = np.ones((5, 5), np.uint8)
+    erosion = cv2.erode(th, kernel, iterations=1)
+    dilation = cv2.dilate(erosion, kernel, iterations=1)
+
+    cv2.imshow('obrazek', dilation)
+    cv2.waitKey(0)
+
+
     cv2.destroyAllWindows()
 
 
-img = cv2.imread('zdj/b10.jpeg')
+    return [], []
+
+
+img = cv2.imread('zdj/b8.jpeg')
 img_transformed = board_perspective_transform(img)
 checkers_list = find_checkers(img_transformed)
+squares_coordinates = find_board_squares()
+find_colored_checkers(img_transformed, checkers_list, squares_coordinates)
 
-print(list_of_border_points)
 
-find_board_squares(img_transformed, list_of_border_points)
 
 

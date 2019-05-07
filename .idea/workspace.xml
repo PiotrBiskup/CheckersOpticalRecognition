@@ -17,8 +17,8 @@
       <file leaf-file-name="CheckersRecognition.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CheckersRecognition.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="26">
-              <caret line="139" column="28" lean-forward="false" selection-start-line="139" selection-start-column="28" selection-end-line="139" selection-end-column="28" />
+            <state relative-caret-position="257">
+              <caret line="186" column="43" lean-forward="false" selection-start-line="186" selection-start-column="43" selection-end-line="186" selection-end-column="43" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -26,7 +26,52 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Piece.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Pieces/Piece.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NullPiece.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Pieces/NullPiece.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Man.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Pieces/Man.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="12" column="55" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="12" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="King.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Pieces/King.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>list_of_bor</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -58,6 +103,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -65,16 +112,20 @@
               <item name="CheckersOpticalRecognition" type="b2602c69:ProjectViewProjectNode" />
               <item name="CheckersOpticalRecognition" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="CheckersOpticalRecognition" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CheckersOpticalRecognition" type="462c0819:PsiDirectoryNode" />
+              <item name="Pieces" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -170,6 +221,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CheckersRecognition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CheckersRecognition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -184,10 +255,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Pieces/NullPiece.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pieces/King.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pieces/Piece.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pieces/Man.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="55" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="12" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CheckersRecognition.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="139" column="28" lean-forward="false" selection-start-line="139" selection-start-column="28" selection-end-line="139" selection-end-column="28" />
+        <state relative-caret-position="257">
+          <caret line="186" column="43" lean-forward="false" selection-start-line="186" selection-start-column="43" selection-end-line="186" selection-end-column="43" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
