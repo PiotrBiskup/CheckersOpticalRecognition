@@ -150,62 +150,58 @@ def find_board_squares():
         x = 24
         y += inc
 
-    # print(squares_cordinates)
-    # for i in squares_cordinates:
-    #     cv2.rectangle(img, (i[0][0], i[0][1]), (i[1][0], i[1][1]), (122, 122, 122), 4)
-    #
-    # cv2.imshow('image', img)
-    # cv2.waitKey()
-    # cv2.destroyAllWindows()
-
     return squares_coord
 
+
 def find_colored_checkers(image, checkers, squares):
-    cv2.imshow('obrazek', image)
-    cv2.waitKey(0)
-    # lower_black = np.array([0, 0, 0])
-    # upper_black = np.array([180, 200, 30])
-    #
-    # cv2.imshow('obrazek', image)
-    # cv2.waitKey(0)
-    #
-    # # zamiana na HSV
-    # hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-    #
-    #
-    # # stworzenie obrazu binarnego z pikseli z podanego zakresu
-    # mask = cv2.inRange(hsv, lower_black, upper_black)
-    #
-    # cv2.imshow('obrazek', mask)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
 
-    gray_scale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    cv2.imshow('obrazek', gray_scale)
-    cv2.waitKey(0)
+    lower_white = np.array([0, 0, 20])
+    upper_white = np.array([180, 50, 255])
 
-    ret, th = cv2.threshold(gray_scale, 180, 255, cv2.THRESH_BINARY)
-    cv2.imshow('obrazek', th)
-    cv2.waitKey(0)
+    # zamiana na HSV
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-    # usuniecie zle wykrytych pojdynczych pikseli
-    kernel = np.ones((5, 5), np.uint8)
-    erosion = cv2.erode(th, kernel, iterations=1)
+    # stworzenie obrazu binarnego z pikseli z podanego zakresu
+    mask = cv2.inRange(hsv, lower_white, upper_white)
+
+    # # usuniecie zle wykrytych pojdynczych pikseli
+    kernel = np.ones((40, 40), np.uint8)
+    erosion = cv2.erode(mask, kernel, iterations=1)
     dilation = cv2.dilate(erosion, kernel, iterations=1)
 
-    cv2.imshow('obrazek', dilation)
-    cv2.waitKey(0)
+    board_set = ['n'] * 64
 
+    for checker in checkers:
+        x1 = checker[0] - 15
+        y1 = checker[1] - 15
 
-    cv2.destroyAllWindows()
+        x2 = checker[0] + 15
+        y2 = checker[1] + 15
 
+        crop_img = dilation[y1:y2, x1:x2]
+        height, width = crop_img.shape
+        n_non_zero = cv2.countNonZero(crop_img)
+        position = -1
 
-    return [], []
+        if (n_non_zero / (height * width)) > 0.8:
+            color = 'w'
+        else:
+            color = 'b'
+
+        for idx, square in enumerate(squares):
+            if (checker[0] > square[0][0]) and (checker[0] < square[1][0]) \
+                    and (checker[1] > square[0][1]) and (checker[1] < square[1][1]):
+                position = idx
+                break
+
+        board_set[position] = color
+
+    return board_set
 
 
 img = cv2.imread('zdj/b8.jpeg')
 img_transformed = board_perspective_transform(img)
-checkers_list = find_checkers(img_transformed)
+checkers_list = find_checkers(img_transformed)[0]
 squares_coordinates = find_board_squares()
 find_colored_checkers(img_transformed, checkers_list, squares_coordinates)
 
