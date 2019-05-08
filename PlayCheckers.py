@@ -38,7 +38,7 @@ currentTiles = []
 # currentTiles[0] = Tile(0, Man("Black", 0))
 # currentTiles[1] = Tile(1, NullPiece())
 
-currentTiles = ['n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'WM', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n','n', 'WM', 'n', 'n', 'n', 'WM', 'n', 'WM', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n']
+currentTiles = ['n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'n', 'BM', 'n', 'BM', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n','n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n']
 ##########################
 ##########################
 
@@ -52,7 +52,7 @@ def square(x,y,w,h,color):
     allTiles.append([color, [x,y,w,h]])
 
 def SeeMove(currentTiles):
-    before = False
+    alliance = "N"
     for tile in chessboard.gameTiles:
         if chessboard.gameTiles[tile].pieceOnTile.toString() == currentTiles[tile]:
             pass
@@ -62,9 +62,15 @@ def SeeMove(currentTiles):
                 alliance = currentTiles[tile]
             if currentTiles[tile] == "n":
                 before = tile
-    if before != False:
+    if(alliance[0]=='B'):
+        alliance = "Black"
+    if (alliance[0] == 'W'):
+        alliance = "White"
+    if alliance != "N":
+        logic.mozliwy_ruch(chessboard,wewnetrzne,bigVector)
 
         ChangePosition(alliance,before,after)
+        logic.Compare(chessboard,bigVector)
 
 def drawPieces():
     xpos = 0
