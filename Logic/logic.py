@@ -39,7 +39,7 @@ def mozliwy_ruch(chessboard, wewnetrzne, bigVector):
                     del wewnetrzne[:]
                     zaszly_zmiany = 1
             elif x == 56 or x == 58 or x == 60 or x == 62:
-                print()
+                pass
 
             else:
                 if chessboard.gameTiles[x + 9].pieceOnTile.toString() == '-':
