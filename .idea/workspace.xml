@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a001f16e-da73-4f7c-adf5-be6b34477efe" name="Default" comment="Second Table with current positions added.&#10;Comparing current positions with current display.&#10;Calculating move of a piece.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logic/logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logic/logic.py" afterDir="false" />
+    <list default="true" id="a001f16e-da73-4f7c-adf5-be6b34477efe" name="Default" comment="Changed logic (compare) via Michal">
+      <change beforePath="$PROJECT_DIR$/Board/Chessboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/Chessboard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlayCheckers.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlayCheckers.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,6 +35,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Board/Chessboard.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="17" column="58" selection-start-line="17" selection-start-column="58" selection-end-line="17" selection-end-column="58" />
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Pieces/King.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
@@ -54,21 +65,9 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PlayCheckers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="72" column="7" selection-start-line="72" selection-start-column="7" selection-end-line="72" selection-end-column="7" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Logic/logic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="223">
               <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
             </state>
           </provider>
@@ -79,6 +78,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="8" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/PlayCheckers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-744">
+              <caret line="173" column="27" selection-start-line="173" selection-start-column="27" selection-end-line="173" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,12 +120,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Board/Chessboard.py" />
         <option value="$PROJECT_DIR$/Pieces/NullPiece.py" />
         <option value="$PROJECT_DIR$/Pieces/Man.py" />
         <option value="$PROJECT_DIR$/Pieces/King.py" />
-        <option value="$PROJECT_DIR$/PlayCheckers.py" />
         <option value="$PROJECT_DIR$/Logic/logic.py" />
+        <option value="$PROJECT_DIR$/Board/Chessboard.py" />
+        <option value="$PROJECT_DIR$/PlayCheckers.py" />
       </list>
     </option>
   </component>
@@ -246,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557316014578</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changed logic (compare) via Michal">
+      <created>1557317614302</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1557317614302</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -274,7 +292,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Second Table with current positions added.&#10;Comparing current positions with current display.&#10;Calculating move of a piece." />
-    <option name="LAST_COMMIT_MESSAGE" value="Second Table with current positions added.&#10;Comparing current positions with current display.&#10;Calculating move of a piece." />
+    <MESSAGE value="Changed logic (compare) via Michal" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed logic (compare) via Michal" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -284,22 +303,17 @@
           <line>69</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/PlayCheckers.py</url>
+          <line>172</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Board/Chessboard.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-981">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CheckersRecognition.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -332,6 +346,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Logic/logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Board/Chessboard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="17" column="58" selection-start-line="17" selection-start-column="58" selection-end-line="17" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Pieces/Man.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -341,18 +372,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PlayCheckers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="72" column="7" selection-start-line="72" selection-start-column="7" selection-end-line="72" selection-end-column="7" />
+        <state relative-caret-position="-744">
+          <caret line="173" column="27" selection-start-line="173" selection-start-column="27" selection-end-line="173" selection-end-column="27" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Logic/logic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
         </state>
       </provider>
     </entry>
