@@ -7,7 +7,7 @@ from Pieces.NullPiece import NullPiece
 import Logic.logic as logic
 
 pygame.init()
-gameDisplay = pygame.display.set_mode((600,600))#((600,680))
+gameDisplay = pygame.display.set_mode((600,680))#((600,680))
 pygame.display.set_caption("CheckersChecker")
 clock = pygame.time.Clock()
 
@@ -38,7 +38,7 @@ currentTiles = []
 # currentTiles[0] = Tile(0, Man("Black", 0))
 # currentTiles[1] = Tile(1, NullPiece())
 
-currentTiles = ['n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'n', 'BM', 'n', 'BM', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n','n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n']
+currentTiles = ['n', 'n', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'n', 'BM', 'n', 'BM', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n','n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n']
 ##########################
 ##########################
 
@@ -163,6 +163,15 @@ bigVector=[]
 #             count = 0
 #     print("\n")
 
+def points():
+    PointsW=0
+    PointsB=0
+    for tile in chessboard.gameTiles:
+        if chessboard.gameTiles[tile].pieceOnTile.toString()[0] == 'B':
+            PointsB+=1
+        if chessboard.gameTiles[tile].pieceOnTile.toString()[0] == 'W':
+            PointsW+=1
+    return PointsB, PointsW
 
 #chessboard.gameTiles[40] = Tile(40, NullPiece())
 #chessboard.gameTiles[33] = Tile(33, Man("White", 33))
@@ -173,7 +182,9 @@ message = "All good"
 font = pygame.font.SysFont("arial", 30)
 text = font.render(message, True, (0, 128, 0))
 
+global PointsW
 PointsW = 12
+global PointsB
 PointsB = 12
 wMessage = "W: " + str(PointsW)
 textW = font.render(wMessage, True, (0, 128, 0))
@@ -193,6 +204,13 @@ while not quitGame:
 
     gameDisplay.fill((128,128,128))
 
+    PointsB, PointsW = points()
+
+    wMessage = "W: " + str(PointsW)
+    textW = font.render(wMessage, True, (0, 128, 0))
+    bMessage = "B: " + str(PointsB)
+    textB = font.render(bMessage, True, (0, 128, 0))
+
     gameDisplay.blit(text,
                 (300 - text.get_width() // 2, 680 - text.get_height()*1.5))
     gameDisplay.blit(textW,
@@ -201,6 +219,8 @@ while not quitGame:
                      (600-text.get_width()//1.5, 680 - text.get_height() * 1.5))
 
     drawPieces()
+
+
 
     # if n == 0:
     #     ChangePosition("White", 44, 37)
