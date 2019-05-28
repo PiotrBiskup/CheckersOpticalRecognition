@@ -13,8 +13,8 @@ def Compare(chessboard, bigVector):                                          #mn
 
     for y in bigVector:
         if tocompare == y:
-            print("git")
-            break
+            return True
+    return False
 
 
 

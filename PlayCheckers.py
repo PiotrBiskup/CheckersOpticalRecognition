@@ -3,6 +3,7 @@ from Board.Chessboard import Board
 import time
 from Board.Tile import Tile
 from Pieces.Man import Man
+from Pieces.King import King
 from Pieces.NullPiece import NullPiece
 import Logic.logic as logic
 
@@ -39,6 +40,7 @@ currentTiles = []
 # currentTiles[1] = Tile(1, NullPiece())
 
 currentTiles = ['n', 'n', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'n', 'BM', 'n', 'BM', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n','n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n']
+lastMove = "Black"
 ##########################
 ##########################
 
@@ -51,26 +53,36 @@ def square(x,y,w,h,color):
     pygame.draw.rect(gameDisplay, color, [x,y,w,h])
     allTiles.append([color, [x,y,w,h]])
 
-def SeeMove(currentTiles):
-    alliance = "N"
-    for tile in chessboard.gameTiles:
-        if chessboard.gameTiles[tile].pieceOnTile.toString() == currentTiles[tile]:
-            pass
-        else:
-            if chessboard.gameTiles[tile].pieceOnTile.toString() == "n":
-                after = tile
-                alliance = currentTiles[tile]
-            if currentTiles[tile] == "n":
-                before = tile
-    if(alliance[0]=='B'):
-        alliance = "Black"
-    if (alliance[0] == 'W'):
-        alliance = "White"
-    if alliance != "N":
-        logic.mozliwy_ruch(chessboard,wewnetrzne,bigVector)
+#please check...
+def newBoard(lastMove):
+    n=0
+    for gameTile in currentTiles:
+        n+=1
+        if(gameTile == 'n'):
+            chessboard.gameTiles[n] = Tile(n, NullPiece())
+        if (gameTile == 'BM'):
+            chessboard.gameTiles[n] = Tile(n, Man("Black",n))
+        if (gameTile == 'BK'):
+            chessboard.gameTiles[n] = Tile(n, King("Black",n))
+        if (gameTile == 'WM'):
+            chessboard.gameTiles[n] = Tile(n, Man("White",n))
+        if (gameTile == 'WK'):
+            chessboard.gameTiles[n] = Tile(n, King("White",n))
+    if (lastMove == "Black"):
+        lastMove = "White"
+    if (lastMove == "White"):
+        lastMove = "Black"
 
-        ChangePosition(alliance,before,after)
-        logic.Compare(chessboard,bigVector)
+
+#need to check that...
+def SeeMove(currentTiles):
+        see = logic.Compare(chessboard,bigVector)
+        if (see == True):
+            newBoard(lastMove)
+        #temp # need to add notifications
+        if (see == False):
+            newBoard(lastMove)
+
 
 def drawPieces():
     xpos = 0
