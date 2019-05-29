@@ -3,6 +3,7 @@ from Board.Chessboard import Board
 import time
 from Board.Tile import Tile
 from Pieces.Man import Man
+from Pieces.King import King
 from Pieces.NullPiece import NullPiece
 import Logic.logic as logic
 
@@ -39,6 +40,8 @@ currentTiles = []
 # currentTiles[1] = Tile(1, NullPiece())
 
 currentTiles = ['n', 'n', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'n', 'BM', 'n', 'BM', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n','n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n']
+lastMove = "Black"
+correct = True
 ##########################
 ##########################
 
@@ -51,26 +54,47 @@ def square(x,y,w,h,color):
     pygame.draw.rect(gameDisplay, color, [x,y,w,h])
     allTiles.append([color, [x,y,w,h]])
 
-def SeeMove(currentTiles):
-    alliance = "N"
-    for tile in chessboard.gameTiles:
-        if chessboard.gameTiles[tile].pieceOnTile.toString() == currentTiles[tile]:
-            pass
-        else:
-            if chessboard.gameTiles[tile].pieceOnTile.toString() == "n":
-                after = tile
-                alliance = currentTiles[tile]
-            if currentTiles[tile] == "n":
-                before = tile
-    if(alliance[0]=='B'):
-        alliance = "Black"
-    if (alliance[0] == 'W'):
-        alliance = "White"
-    if alliance != "N":
-        logic.mozliwy_ruch(chessboard,bigVector)
+def GoBack(currentTiles):
+    n = 0
+    for gameTile in currentTiles:
+        n += 1
+        if (gameTile != chessboard.gameTiles[n].toString()):
+            correct = False
+            break
+        if (gameTile == chessboard.gameTiles[n].toString() and n == 63):
+            correct = True
 
-        ChangePosition(alliance,before,after)
-        logic.Compare(chessboard,bigVector)
+#please check...
+def newBoard(lastMove):
+    n=0
+    for gameTile in currentTiles:
+        n+=1
+        if(gameTile == 'n'):
+            chessboard.gameTiles[n] = Tile(n, NullPiece())
+        if (gameTile == 'BM'):
+            chessboard.gameTiles[n] = Tile(n, Man("Black",n))
+        if (gameTile == 'BK'):
+            chessboard.gameTiles[n] = Tile(n, King("Black",n))
+        if (gameTile == 'WM'):
+            chessboard.gameTiles[n] = Tile(n, Man("White",n))
+        if (gameTile == 'WK'):
+            chessboard.gameTiles[n] = Tile(n, King("White",n))
+    if (lastMove == "Black"):
+        lastMove = "White"
+    if (lastMove == "White"):
+        lastMove = "Black"
+
+#need to check that...
+def SeeMove(currentTiles):
+        see = logic.Compare(chessboard,bigVector)
+        if (see == True):
+            correct == True
+            newBoard(lastMove)
+        #temp # need to add notifications
+        if (see == False):
+            correct == False
+            #notification
+
 
 def drawPieces():
     xpos = 0
@@ -133,38 +157,35 @@ wewnetrzne=[]
 bigVector=[]
 
 ###MICHAŁOWE TESTY, Prosze nie usuwac###
-chessboard.gameTiles[8] = Tile(8, NullPiece())
-chessboard.gameTiles[10] = Tile(10, Man("White", 10))
-chessboard.gameTiles[12] = Tile(12, NullPiece())
-chessboard.gameTiles[14] = Tile(14, NullPiece())
-chessboard.gameTiles[5] = Tile(5, NullPiece())
-chessboard.gameTiles[5] = Tile(5, NullPiece())
-chessboard.gameTiles[3] = Tile(3, NullPiece())
-drawPieces()
-for x in range(64):
-    chessboard.gameTiles[x] = Tile(x, NullPiece())
-print("\n")
-chessboard.gameTiles[17] = Tile(17, Man("White", 17))
-chessboard.gameTiles[35] = Tile(35, Man("White", 35))
-chessboard.gameTiles[8] = Tile(8, Man("Black", 8))
-chessboard.gameTiles[28] = Tile(28, Man("Black", 28))
-chessboard.gameTiles[33] = Tile(33, ("White", 33))
-chessboard.gameTiles[53] = Tile(53, Man("White", 53))
-chessboard.printBoard()
-print("\n")
-logic.mozliwe_bicia_dla_bialych(chessboard,bigVector);
-logic.mozliwe_bicia(chessboard, bigVector)
-logic.mozliwy_ruch(chessboard, bigVector)
-for x in bigVector:
-   # print(x)
-    print('stop',"\n")
-    for idx, tiles in enumerate(x):
-        print('|', end=x[idx])
-        count += 1
-        if count == 8:
-            print('|', end='\n')
-            count = 0
-    print("\n")
+# chessboard.gameTiles[8] = Tile(8, NullPiece())
+# chessboard.gameTiles[10] = Tile(10, Man("White", 10))
+# chessboard.gameTiles[12] = Tile(12, NullPiece())
+# chessboard.gameTiles[14] = Tile(14, NullPiece())
+# chessboard.gameTiles[5] = Tile(5, NullPiece())
+# chessboard.gameTiles[5] = Tile(5, NullPiece())
+# chessboard.gameTiles[3] = Tile(3, NullPiece())
+# drawPieces()
+# for x in range(64):
+#     chessboard.gameTiles[x] = Tile(x, NullPiece())
+# print("\n")
+# chessboard.gameTiles[17] = Tile(17, Man("White", 17))
+# chessboard.gameTiles[35] = Tile(35, Man("White", 35))
+# chessboard.gameTiles[8] = Tile(8, Man("Black", 8))
+# chessboard.gameTiles[33] = Tile(33, Man("White", 33))
+# chessboard.gameTiles[53] = Tile(53, Man("White", 53))
+#chessboard.printBoard()
+# print("\n")
+# logic.mozliwe_bicia(chessboard,wewnetrzne, bigVector)
+# #logic.mozliwy_ruch(chessboard,wewnetrzne, bigVector)
+# for x in bigVector:
+#    # print(x)
+#     for idx, tiles in enumerate(x):
+#         print('|', end=x[idx])
+#         count += 1
+#         if count == 8:
+#             print('|', end='\n')
+#             count = 0
+#     print("\n")
 
 def points():
     PointsW=0
@@ -235,7 +256,13 @@ while not quitGame:
 
     pygame.display.update()
     time.sleep(1)
-    SeeMove(currentTiles)
+
+    if (correct == True):
+        SeeMove(currentTiles)
+    if (correct == False):
+        GoBack(currentTiles)
+
+
     allTiles = []
     allPieces = []
 
