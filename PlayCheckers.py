@@ -41,6 +41,7 @@ currentTiles = []
 
 currentTiles = ['n', 'n', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'n', 'BM', 'n', 'BM', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n','n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n']
 lastMove = "Black"
+correct = True
 ##########################
 ##########################
 
@@ -52,6 +53,16 @@ def ChangePosition(alliance,before,after):
 def square(x,y,w,h,color):
     pygame.draw.rect(gameDisplay, color, [x,y,w,h])
     allTiles.append([color, [x,y,w,h]])
+
+def GoBack(currentTiles):
+    n = 0
+    for gameTile in currentTiles:
+        n += 1
+        if (gameTile != chessboard.gameTiles[n].toString()):
+            correct = False
+            break
+        if (gameTile == chessboard.gameTiles[n].toString() and n == 63):
+            correct = True
 
 #please check...
 def newBoard(lastMove):
@@ -73,15 +84,16 @@ def newBoard(lastMove):
     if (lastMove == "White"):
         lastMove = "Black"
 
-
 #need to check that...
 def SeeMove(currentTiles):
         see = logic.Compare(chessboard,bigVector)
         if (see == True):
+            correct == True
             newBoard(lastMove)
         #temp # need to add notifications
         if (see == False):
-            newBoard(lastMove)
+            correct == False
+            #notification
 
 
 def drawPieces():
@@ -244,7 +256,13 @@ while not quitGame:
 
     pygame.display.update()
     time.sleep(1)
-    SeeMove(currentTiles)
+
+    if (correct == True):
+        SeeMove(currentTiles)
+    if (correct == False):
+        GoBack(currentTiles)
+
+
     allTiles = []
     allPieces = []
 
