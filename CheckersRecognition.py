@@ -124,24 +124,27 @@ def board_perspective_transform(source_image):
 
 def find_checkers(image):
     # dodanie rozmycia zeby lepiej wykrywac kola
-    blurred_img = cv2.medianBlur(image, 7)
+    blurred_img = cv2.medianBlur(image, 5)
     gray_img = cv2.cvtColor(blurred_img, cv2.COLOR_BGR2GRAY)
 
-    circles = cv2.HoughCircles(gray_img, cv2.HOUGH_GRADIENT, 1, 40, param1=35, param2=21, minRadius=24,
-                               maxRadius=35)  # 1,40,35,22,25,35
+    circles = cv2.HoughCircles(gray_img, cv2.HOUGH_GRADIENT, 1, 40, param1=35, param2=24, minRadius=29,
+                               maxRadius=40)  # 1,40,35,22,25,35
 
     if circles is not None:
         circles = np.uint16(np.around(circles))
-    #     index = 1
-    #     for i in circles[0, :]:
-    #         # print(str(index) + ': ' + str(i))
-    #         index += 1
-    #         # draw the outer circle
-    #         cv2.circle(image, (i[0], i[1]), i[2], (0, 255, 0), 2)
-    #         # draw the center of the circle
-    #         cv2.circle(image, (i[0], i[1]), 2, (0, 0, 255), 3)
-    #
-    # cv2.imshow('obrazek', image)
+        index = 1
+
+        img_circles = image.copy()
+
+        for i in circles[0, :]:
+            # print(str(index) + ': ' + str(i))
+            index += 1
+            # draw the outer circle
+            cv2.circle(img_circles, (i[0], i[1]), i[2], (0, 255, 0), 2)
+            # draw the center of the circle
+            cv2.circle(img_circles, (i[0], i[1]), 2, (0, 0, 255), 3)
+
+    cv2.imshow('obrazek', img_circles)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
@@ -173,13 +176,13 @@ def find_board_squares():
 
 
 def find_colored_checkers(image, checkers, squares):
-    lower_white = np.array([0, 0, 20])  # 0,0,20   5,100,100
-    upper_white = np.array([180, 50, 255])  # 180,50,255  25,255,255
+    lower_white = np.array([0, 0, 200])  # 0,0,20   5,100,100
+    upper_white = np.array([180, 255, 255])  # 180,50,255  25,255,255
 
     # zamiana na HSV
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-    #
+    # cv2.imshow('image', hsv)
 
     # stworzenie obrazu binarnego z pikseli z podanego zakresu
     mask = cv2.inRange(hsv, lower_white, upper_white)
@@ -250,35 +253,110 @@ def run_all(img):
 
                 index += 1
 
-            cv2.imshow('obrazek', img_transformed)
-            cv2.waitKey()
+            # cv2.imshow('obrazek', img_transformed)
+
+            return mojatablic, img_transformed
+
         else:
-            print("nie ma 4 pkt")
+            print("nie ma kolke")
+
+            return None, None
     else:
-        print("nie ma kolek")
+        print("nie 4 pkt")
+        return None, None
 
 
-cap = cv2.VideoCapture('zdj/m3.mov')
-fgbg = cv2.createBackgroundSubtractorMOG2()
+def check_if_was_move(source, list_of_eight_after_source):
+    cnt = 0
+    for x in list_of_eight_after_source:
+        if x == source:
+            cnt += 1
+
+    if cnt > 5:
+       return True
+    else:
+        return False
+
+cap = cv2.VideoCapture(4)
+# fgbg = cv2.createBackgroundSubtractorMOG2()
+
+counter = 0
+avoid_first_frame = 1
+prev = []
+list_of_eight_prev = []
+
 
 while cap.isOpened():
     ret, frame = cap.read()
+
     if ret:
-        #
-        fgmask = fgbg.apply(frame)
+        tab, img = run_all(frame)
+        if tab is not None and img is not None:
+            cv2.imshow('lol', img)
+            if avoid_first_frame == 1:
 
-        h, w = fgmask.shape
-        ratio = cv2.countNonZero(fgmask) / (h*w)
+                prev = tab
+                avoid_first_frame += 1
 
-        if ratio < 0.1:
-            print('ratio' + str(ratio))
-            run_all(frame)
+            else:
+                if prev != tab:
+                    if counter == 0:
+                        prev = tab
+                        counter += 1
+                    else:
+                        list_of_eight_prev.append(tab)
+                        counter += 1
+                else:
+                    if counter > 0:
+                        list_of_eight_prev.append(tab)
+                        counter += 1
+
+            if counter == 8:
+                if check_if_was_move(prev, list_of_eight_prev):
+                    print('------------------------RUCH--------------------------------------------------------------')
+                    print('------------------------RUCH--------------------------------------------------------------')
+                    print('------------------------RUCH--------------------------------------------------------------')
+                    print('------------------------RUCH--------------------------------------------------------------')
+                    print('------------------------RUCH--------------------------------------------------------------')
+                    print('------------------------RUCH--------------------------------------------------------------')
+                    print('------------------------RUCH--------------------------------------------------------------')
+                    print('------------------------RUCH--------------------------------------------------------------')
+                    print('------------------------RUCH--------------------------------------------------------------')
+                    print('------------------------RUCH--------------------------------------------------------------')
+                    print('------------------------RUCH--------------------------------------------------------------')
+                    counter = 0
+                    list_of_eight_prev = []
+                else:
+                    counter = 0
+                    list_of_eight_prev = []
+
+
+
+
+
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
-            print('ratio' + str(ratio))
             break
+
     else:
         break
+
+    # if ret:
+    #     #
+    #     fgmask = fgbg.apply(frame)
+    #
+    #     h, w = fgmask.shape
+    #     ratio = cv2.countNonZero(fgmask) / (h*w)
+    #
+    #     if ratio < 0.1:
+    #         print('ratio' + str(ratio))
+    #         run_all(frame)
+    #
+    #     if cv2.waitKey(1) & 0xFF == ord('q'):
+    #         print('ratio' + str(ratio))
+    #         break
+    # else:
+    #     break
 
 cap.release()
 cv2.destroyAllWindows()
