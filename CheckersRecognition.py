@@ -2,6 +2,37 @@ import cv2
 import numpy as np
 
 
+def find_corners(vertex_list):
+
+    xmin = vertex_list[0][0]
+    xmax = vertex_list[0][0]
+    ymin = vertex_list[0][1]
+    ymax = vertex_list[0][1]
+
+    for x in vertex_list:
+
+        if x[0] < xmin:
+            xmin = x[0]
+
+        if x[0] > xmax:
+            xmax = x[0]
+
+        if x[1] < ymin:
+            ymin = x[1]
+
+        if x[1] > ymax:
+            ymax = x[1]
+
+    corners_list = []
+
+    for x in vertex_list:
+
+        if x[0] == xmin or x[0] == xmax or x[1] == ymin or x[1] == ymax:
+            corners_list.append(x)
+
+    return corners_list
+
+
 def check_vertex_list(vertex_list):
 
     if vertex_list[0][0] <= vertex_list[1][0] and vertex_list[2][0] >= vertex_list[3][0]:
@@ -60,7 +91,7 @@ def board_perspective_transform(source_image):
     # stworzenie obrazu binarnego z pikseli z podanego zakresu
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
-    # cv2.imshow('obrazek', mask)
+    cv2.imshow('mask', mask)
     # cv2.waitKey(0)
 
     # usuniecie zle wykrytych pojdynczych pikseli
@@ -94,12 +125,26 @@ def board_perspective_transform(source_image):
 
     # cv2.imshow('obrazek', img2)
     # cv2.waitKey(0)
+    if len(list_of_points) != 12:
+        print("Nie ma 12 punktow")
+        return None
 
-    if len(list_of_points) == 4:
-        list_of_points.reverse()
+    else:
+
+        # print(list_of_points)
+        list_of_corners = find_corners(list_of_points)
+
+        if len(list_of_corners) != 4:
+            print('Lista rogow')
+            print(list_of_corners)
+            print('Lista puntkow')
+            print(list_of_points)
+            return None
+
+        list_of_corners.reverse()
         # print('1. ' + str(list_of_points))
 
-        checked_list_of_points = check_vertex_list(list_of_points)
+        checked_list_of_points = check_vertex_list(list_of_corners)
         # print('2. ' + str(checked_list_of_points))
         increased_list_of_points = increase_board_area(checked_list_of_points)
 
@@ -118,16 +163,14 @@ def board_perspective_transform(source_image):
         # cv2.waitKey()
 
         return dst
-    else:
-        return None
 
 
 def find_checkers(image):
     # dodanie rozmycia zeby lepiej wykrywac kola
-    blurred_img = cv2.medianBlur(image, 5)
+    blurred_img = cv2.medianBlur(image, 7)
     gray_img = cv2.cvtColor(blurred_img, cv2.COLOR_BGR2GRAY)
 
-    circles = cv2.HoughCircles(gray_img, cv2.HOUGH_GRADIENT, 1, 40, param1=35, param2=24, minRadius=29,
+    circles = cv2.HoughCircles(gray_img, cv2.HOUGH_GRADIENT, 1, 40, param1=37, param2=22, minRadius=29,
                                maxRadius=40)  # 1,40,35,22,25,35
 
     if circles is not None:
@@ -144,7 +187,7 @@ def find_checkers(image):
             # draw the center of the circle
             cv2.circle(img_circles, (i[0], i[1]), 2, (0, 0, 255), 3)
 
-    cv2.imshow('obrazek', img_circles)
+        cv2.imshow('obrazek', img_circles)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
@@ -214,6 +257,9 @@ def find_colored_checkers(image, checkers, squares):
 
         crop_img = dilation[y1:y2, x1:x2]
         height, width = crop_img.shape
+        if height == 0 or width == 0:
+            return None
+
         n_non_zero = cv2.countNonZero(crop_img)
         position = -1
 
@@ -242,16 +288,16 @@ def run_all(img):
 
             mojatablic = find_colored_checkers(img_transformed, checkers_list[0], squares_coordinates)
 
-            print(len(mojatablic))
-            index = 0
-            for x in mojatablic:
-                if index == 7:
-                    print(x)
-                    index = -1
-                else:
-                    print(x + '  ', end='')
-
-                index += 1
+            # print(len(mojatablic))
+            # index = 0
+            # for x in mojatablic:
+            #     if index == 7:
+            #         print(x)
+            #         index = -1
+            #     else:
+            #         print(x + '  ', end='')
+            #
+            #     index += 1
 
             # cv2.imshow('obrazek', img_transformed)
 
@@ -277,9 +323,11 @@ def check_if_was_move(source, list_of_eight_after_source):
     else:
         return False
 
+
 cap = cv2.VideoCapture(4)
 # fgbg = cv2.createBackgroundSubtractorMOG2()
 
+move_counter = 0
 counter = 0
 avoid_first_frame = 1
 prev = []
@@ -291,6 +339,7 @@ while cap.isOpened():
 
     if ret:
         tab, img = run_all(frame)
+        cv2.imshow('frame', frame)
         if tab is not None and img is not None:
             cv2.imshow('lol', img)
             if avoid_first_frame == 1:
@@ -313,50 +362,21 @@ while cap.isOpened():
 
             if counter == 8:
                 if check_if_was_move(prev, list_of_eight_prev):
-                    print('------------------------RUCH--------------------------------------------------------------')
-                    print('------------------------RUCH--------------------------------------------------------------')
-                    print('------------------------RUCH--------------------------------------------------------------')
-                    print('------------------------RUCH--------------------------------------------------------------')
-                    print('------------------------RUCH--------------------------------------------------------------')
-                    print('------------------------RUCH--------------------------------------------------------------')
-                    print('------------------------RUCH--------------------------------------------------------------')
-                    print('------------------------RUCH--------------------------------------------------------------')
-                    print('------------------------RUCH--------------------------------------------------------------')
-                    print('------------------------RUCH--------------------------------------------------------------')
-                    print('------------------------RUCH--------------------------------------------------------------')
+                    move_counter += 1
+                    print(str(move_counter) + '------------------------RUCH--------------------------------------------------------------')
                     counter = 0
                     list_of_eight_prev = []
+                    prev = tab
                 else:
                     counter = 0
                     list_of_eight_prev = []
-
-
-
-
-
+                    prev = tab
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
     else:
         break
-
-    # if ret:
-    #     #
-    #     fgmask = fgbg.apply(frame)
-    #
-    #     h, w = fgmask.shape
-    #     ratio = cv2.countNonZero(fgmask) / (h*w)
-    #
-    #     if ratio < 0.1:
-    #         print('ratio' + str(ratio))
-    #         run_all(frame)
-    #
-    #     if cv2.waitKey(1) & 0xFF == ord('q'):
-    #         print('ratio' + str(ratio))
-    #         break
-    # else:
-    #     break
 
 cap.release()
 cv2.destroyAllWindows()
