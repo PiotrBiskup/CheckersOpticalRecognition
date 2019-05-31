@@ -10,4 +10,4 @@ class Man(Piece):
         self.position = position
 
     def toString(self):
-        return "M" if self.alliance == "Black" else "m"
+        return "BM" if self.alliance == "Black" else "WM"

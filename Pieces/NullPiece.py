@@ -6,4 +6,4 @@ class NullPiece:
         pass
 
     def toString(self):
-        return "-"
+        return "n"

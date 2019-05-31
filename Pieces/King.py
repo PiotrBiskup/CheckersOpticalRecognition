@@ -10,4 +10,4 @@ class King(Piece):
         self.position = position
 
     def toString(self):
-        return "K" if self.alliance == "Black" else "k"
+        return "BK" if self.alliance == "Black" else "WK"

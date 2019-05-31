@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a001f16e-da73-4f7c-adf5-be6b34477efe" name="Default" comment="" />
+    <list default="true" id="a001f16e-da73-4f7c-adf5-be6b34477efe" name="Default" comment="newBoard - working&#10;SeeMove - needs to be called when the move is made.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlayCheckers.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlayCheckers.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,11 +16,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+
       <file leaf-file-name="CheckersRecognition.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CheckersRecognition.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-2844">
               <caret line="221" column="30" lean-forward="false" selection-start-line="221" selection-start-column="30" selection-end-line="221" selection-end-column="30" />
+
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -26,14 +30,25 @@
           </provider>
         </entry>
       </file>
+
       <file leaf-file-name="szukanie_kolorow.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/szukanie_kolorow.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1221">
               <caret line="100" column="20" lean-forward="false" selection-start-line="100" selection-start-column="20" selection-end-line="100" selection-end-column="20" />
+
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Pieces/NullPiece.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
@@ -78,17 +93,7 @@
     <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -98,6 +103,26 @@
             <path>
               <item name="CheckersOpticalRecognition" type="b2602c69:ProjectViewProjectNode" />
               <item name="CheckersOpticalRecognition" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CheckersOpticalRecognition" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CheckersOpticalRecognition" type="462c0819:PsiDirectoryNode" />
+              <item name="Board" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CheckersOpticalRecognition" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CheckersOpticalRecognition" type="462c0819:PsiDirectoryNode" />
+              <item name="ChessArt" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CheckersOpticalRecognition" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CheckersOpticalRecognition" type="462c0819:PsiDirectoryNode" />
+              <item name="Logic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CheckersOpticalRecognition" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CheckersOpticalRecognition" type="462c0819:PsiDirectoryNode" />
+              <item name="Pieces" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -125,6 +150,7 @@
   </component>
   <component name="RunManager" selected="Python.CheckersRecognition">
     <configuration name="CheckersRecognition" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="CheckersRecognition" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -135,12 +161,35 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="CheckersRecognition" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CheckersRecognition.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PlayCheckers" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="CheckersRecognition" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Hp\PycharmProjects\Checkers\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PlayCheckers.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="szukanie_kolorow" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -171,9 +220,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -185,10 +231,53 @@
       <option name="presentableId" value="Default" />
       <updated>1554897319352</updated>
     </task>
+    <task id="LOCAL-00001" summary="Second Table with current positions added.&#10;Comparing current positions with current display.&#10;Calculating move of a piece.">
+      <created>1557316014578</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1557316014578</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Changed logic (compare) via Michal">
+      <created>1557317614302</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1557317614302</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Notifications and points counter.">
+      <created>1557319287217</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1557319287217</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Notifications and points counter.">
+      <created>1557319344133</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1557319344133</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Notifications and points counter.">
+      <created>1557319405684</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1557319405684</updated>
+    </task>
+    <task id="LOCAL-00006" summary="newBoard - working&#10;SeeMove - needs to be called when the move is made.">
+      <created>1559049474790</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1559049474790</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.4925926" order="0" side_tool="false" content_ui="combo" />
@@ -379,8 +468,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CheckersRecognition.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="34">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

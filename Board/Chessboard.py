@@ -15,7 +15,7 @@ class Board:
             self.gameTiles[x] = Tile(x, NullPiece())
 
         for gameTile in self.gameTiles:
-            if (gameTile%2==1 and gameTile<8):
+            if (gameTile%2==1 and gameTile<8 and gameTile>1):
                 self.gameTiles[gameTile] = Tile(gameTile, Man("Black",gameTile))
             if (gameTile%2==0 and gameTile>=8 and gameTile<16):
                 self.gameTiles[gameTile] = Tile(gameTile, Man("Black",gameTile))
@@ -73,12 +73,12 @@ class Board:
 
 
 
-    def printBoard(self):
-        count = 0
-        for tiles in range(64):
-            print('|', end = self.gameTiles[tiles].pieceOnTile.toString())
-            count += 1
-            if count == 8:
-                print('|', end='\n')
-                count = 0
+    # def printBoard(self):
+    #     count = 0
+    #     for tiles in range(64):
+    #         print('|', end = self.gameTiles[tiles].pieceOnTile.toString())
+    #         count += 1
+    #         if count == 8:
+    #             print('|', end='\n')
+    #             count = 0
 
