@@ -214,31 +214,30 @@ def find_board_squares():
 
 def find_colored_checkers(image, checkers, squares):
 
-    # zamiana na HSV
-    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-    # cv2.imshow('image', hsv)
-
-    # stworzenie obrazu binarnego z pikseli z podanego zakresu
-    mask = cv2.inRange(hsv, lower_white, upper_white)
-
-    cv2.imshow('maskwhite', mask)
-    # cv2.waitKey()
-
-
-    # # usuniecie zle wykrytych pojdynczych pikseli
-    kernel = np.ones((30, 30), np.uint8)
-    erosion = cv2.erode(mask, kernel, iterations=1)
-    dilation = cv2.dilate(erosion, kernel, iterations=1)
-
-    # cv2.imshow('image', dilation)
-    # cv2.waitKey()
-    # cv2.destroyAllWindows()
-
     board_set = ['n'] * 64
 
-    # print(checkers)
-    # print(squares)
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+    kernel = np.ones((30, 30), np.uint8)
+    kernel_color = np.ones((12, 12), np.uint8)
+
+    mask_white = cv2.inRange(hsv, lower_white, upper_white)
+    erosion_white = cv2.erode(mask_white, kernel, iterations=1)
+    dilation_white = cv2.dilate(erosion_white, kernel, iterations=1)
+
+    cv2.imshow('w', dilation_white)
+
+    mask_pink = cv2.inRange(hsv, lower_pink, upper_pink)
+    erosion_pink = cv2.erode(mask_pink, kernel_color, iterations=1)
+    dilation_pink = cv2.dilate(erosion_pink, kernel, iterations=1)
+
+    cv2.imshow('p', dilation_pink)
+
+    mask_green = cv2.inRange(hsv, lower_dark_green, upper_dark_green)
+    erosion_green = cv2.erode(mask_green, kernel_color, iterations=1)
+    dilation_green = cv2.dilate(erosion_green, kernel, iterations=1)
+
+    cv2.imshow('g', dilation_green)
 
     for checker in checkers:
         x1 = checker[0] - 15
@@ -247,16 +246,34 @@ def find_colored_checkers(image, checkers, squares):
         x2 = checker[0] + 15
         y2 = checker[1] + 15
 
-        crop_img = dilation[y1:y2, x1:x2]
-        height, width = crop_img.shape
-        if height == 0 or width == 0:
+        crop_img_w = dilation_white[y1:y2, x1:x2]
+        height_w, width_w = crop_img_w.shape
+
+        if height_w == 0 or width_w == 0:
             return None
 
-        n_non_zero = cv2.countNonZero(crop_img)
-        position = -1
+        crop_img_p = dilation_pink[y1:y2, x1:x2]
+        height_p, width_p = crop_img_p.shape
 
-        if (n_non_zero / (height * width)) > 0.8:
+        if height_p == 0 or width_p == 0:
+            return None
+
+        crop_img_g = dilation_green[y1:y2, x1:x2]
+        height_g, width_g = crop_img_g.shape
+
+        if height_g == 0 or width_g == 0:
+            return None
+
+        n_non_zero_w = cv2.countNonZero(crop_img_w)
+        n_non_zero_p = cv2.countNonZero(crop_img_p)
+        n_non_zero_g = cv2.countNonZero(crop_img_g)
+
+        if (n_non_zero_w / (height_w * width_w)) > 0.8:
             color = 'WM'
+        elif (n_non_zero_p / (height_p * width_p)) > 0.6:
+            color = 'WK'
+        elif (n_non_zero_g / (height_g * width_g)) > 0.6:
+            color = 'BK'
         else:
             color = 'BM'
 
@@ -264,9 +281,8 @@ def find_colored_checkers(image, checkers, squares):
             if (checker[0] > square[0][0]) and (checker[0] < square[1][0]) \
                     and (checker[1] > square[0][1]) and (checker[1] < square[1][1]):
                 position = idx
+                board_set[position] = color
                 break
-
-        board_set[position] = color
 
     return board_set
 
@@ -309,8 +325,8 @@ def check_if_was_move(source, list_of_eight_after_source):
         if x == source:
             cnt += 1
 
-    if cnt > 5:
-       return True
+    if cnt > 4:
+        return True
     else:
         return False
 
