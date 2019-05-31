@@ -1,36 +1,44 @@
 import cv2
 import numpy as np
 
+lower_white = np.array([0, 0, 200])  # 0,0,200   5,100,100 , 0,0,200 - bardzo czule
+upper_white = np.array([180, 50, 255])  # 180,50,255  25,255,255 - 180, 255, 255
 
-def find_corners(vertex_list):
+lower_pink = np.array([160, 100, 100])
+upper_pink = np.array([179, 255, 255])
 
-    xmin = vertex_list[0][0]
-    xmax = vertex_list[0][0]
-    ymin = vertex_list[0][1]
-    ymax = vertex_list[0][1]
+lower_dark_green = np.array([50, 60, 60])
+upper_dark_green = np.array([80, 255, 255])
 
-    for x in vertex_list:
+lower_yellow = np.array([20, 100, 100])
+upper_yellow = np.array([50, 255, 255])
 
-        if x[0] < xmin:
-            xmin = x[0]
+lower_blue = np.array([84, 100, 100])  # 100,50,50  100, 70, 70     84,100,100
+upper_blue = np.array([104, 255, 255])  # 130,255,255      104,255,255
 
-        if x[0] > xmax:
-            xmax = x[0]
 
-        if x[1] < ymin:
-            ymin = x[1]
+def check_edges(hsv_image):
+    mask = cv2.inRange(hsv_image, lower_yellow, upper_yellow)
+    kernel = np.ones((4, 4), np.uint8)
+    erosion = cv2.erode(mask, kernel, iterations=1)
+    dilation = cv2.dilate(erosion, kernel, iterations=1)
+    image, contours, hierarchy = cv2.findContours(dilation, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    img2 = cv2.drawContours(image, contours, -1, (128, 255, 187), 3)
 
-        if x[1] > ymax:
-            ymax = x[1]
+    list_of_edges_points = []
 
-    corners_list = []
+    for i in contours:
+        cnt = i
+        M = cv2.moments(cnt)
+        cx = int(M['m10'] / M['m00'])
+        cy = int(M['m01'] / M['m00'])
+        img2 = cv2.line(img2, (cx, cy), (cx, cy), (128, 255, 187), 5)
+        list_of_edges_points.append([cx, cy])
 
-    for x in vertex_list:
-
-        if x[0] == xmin or x[0] == xmax or x[1] == ymin or x[1] == ymax:
-            corners_list.append(x)
-
-    return corners_list
+    if len(list_of_edges_points) == 8:
+        return True
+    else:
+        return False
 
 
 def check_vertex_list(vertex_list):
@@ -66,15 +74,6 @@ def increase_board_area(vertex_list):
 
 
 def board_perspective_transform(source_image):
-    # testowanie dla roznych kolorow prostokatow
-    # lower_red = np.array([0, 100, 100])
-    # upper_red = np.array([10, 255, 255])
-    #
-    # lower_yellow = np.array([20, 100, 100])
-    # upper_yellow = np.array([30, 255, 255])
-
-    lower_blue = np.array([84, 100, 100])  # 100,50,50  100, 70, 70     84,100,100
-    upper_blue = np.array([104, 255, 255]) #130,255,255      104,255,255
 
     # zmniejszenie obrazu
     # res = cv2.resize(image, None, fx=0.18, fy=0.18, interpolation=cv2.INTER_CUBIC)
@@ -91,14 +90,14 @@ def board_perspective_transform(source_image):
     # stworzenie obrazu binarnego z pikseli z podanego zakresu
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
-    cv2.imshow('mask', mask)
+    #cv2.imshow('mask', mask)
     # cv2.waitKey(0)
 
     # usuniecie zle wykrytych pojdynczych pikseli
     kernel = np.ones((6, 6), np.uint8)
     erosion = cv2.erode(mask, kernel, iterations=1)
 
-    # cv2.imshow('obrazek', erosion)
+    #cv2.imshow('ed', erosion)
     # cv2.waitKey(0)
 
     dilation = cv2.dilate(erosion, kernel, iterations=1)
@@ -113,7 +112,7 @@ def board_perspective_transform(source_image):
     img2 = cv2.drawContours(image, contours, -1, (128, 255, 187), 3)
 
     # wyliczenie srodkow masy prostokatow
-    list_of_points = []
+    list_of_corners = []
 
     for i in contours:
         cnt = i
@@ -121,24 +120,19 @@ def board_perspective_transform(source_image):
         cx = int(M['m10'] / M['m00'])
         cy = int(M['m01'] / M['m00'])
         img2 = cv2.line(img2, (cx, cy), (cx, cy), (128, 255, 187), 5)
-        list_of_points.append([cx, cy])
+        list_of_corners.append([cx, cy])
 
     # cv2.imshow('obrazek', img2)
     # cv2.waitKey(0)
-    if len(list_of_points) != 12:
-        print("Nie ma 12 punktow")
+
+    if len(list_of_corners) != 4:
+        print("Nie ma 4 rogow")
         return None
 
     else:
 
-        # print(list_of_points)
-        list_of_corners = find_corners(list_of_points)
-
-        if len(list_of_corners) != 4:
-            print('Lista rogow')
-            print(list_of_corners)
-            print('Lista puntkow')
-            print(list_of_points)
+        if not check_edges(hsv):
+            print('Nie ma 8 zoltych znacznikow')
             return None
 
         list_of_corners.reverse()
@@ -219,8 +213,6 @@ def find_board_squares():
 
 
 def find_colored_checkers(image, checkers, squares):
-    lower_white = np.array([0, 0, 200])  # 0,0,20   5,100,100
-    upper_white = np.array([180, 255, 255])  # 180,50,255  25,255,255
 
     # zamiana na HSV
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -230,7 +222,7 @@ def find_colored_checkers(image, checkers, squares):
     # stworzenie obrazu binarnego z pikseli z podanego zakresu
     mask = cv2.inRange(hsv, lower_white, upper_white)
 
-    # cv2.imshow('image', mask)
+    cv2.imshow('maskwhite', mask)
     # cv2.waitKey()
 
 
@@ -298,17 +290,16 @@ def run_all(img):
             #         print(x + '  ', end='')
             #
             #     index += 1
-
             # cv2.imshow('obrazek', img_transformed)
 
             return mojatablic, img_transformed
 
         else:
-            print("nie ma kolke")
+            print("There is no checkers")
 
             return None, None
     else:
-        print("nie 4 pkt")
+        #nie znaleziono wszystkich znacznikow
         return None, None
 
 
@@ -325,7 +316,6 @@ def check_if_was_move(source, list_of_eight_after_source):
 
 
 cap = cv2.VideoCapture(4)
-# fgbg = cv2.createBackgroundSubtractorMOG2()
 
 move_counter = 0
 counter = 0
@@ -333,15 +323,14 @@ avoid_first_frame = 1
 prev = []
 list_of_eight_prev = []
 
-
 while cap.isOpened():
     ret, frame = cap.read()
 
     if ret:
-        tab, img = run_all(frame)
+        tab, img_transf = run_all(frame)
         cv2.imshow('frame', frame)
-        if tab is not None and img is not None:
-            cv2.imshow('lol', img)
+        if tab is not None and img_transf is not None:
+            cv2.imshow('lol', img_transf)
             if avoid_first_frame == 1:
 
                 prev = tab
