@@ -645,6 +645,7 @@ def mozliwe_ruchy_dla_bialej_damy(bigVector,chessboard):
 
 
 
+
 def mozliwe_bicia_dla_czarnej_damy(chessboard, bigVector):
     wewnetrzne = []
     zaszly_zmiany = 0
