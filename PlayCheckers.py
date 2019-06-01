@@ -164,28 +164,34 @@ bigVector=[]
 # chessboard.gameTiles[5] = Tile(5, NullPiece())
 # chessboard.gameTiles[5] = Tile(5, NullPiece())
 # chessboard.gameTiles[3] = Tile(3, NullPiece())
-# drawPieces()
-# for x in range(64):
-#     chessboard.gameTiles[x] = Tile(x, NullPiece())
-# print("\n")
+drawPieces()
+for x in range(64):
+    chessboard.gameTiles[x] = Tile(x, NullPiece())
+print("\n")
+chessboard.gameTiles[8] = Tile(8, King("Black", 8))
+chessboard.gameTiles[56] = Tile(56, King("Black", 56))
+chessboard.gameTiles[35] = Tile(35, King("Black", 35))
+chessboard.gameTiles[26] = Tile(26, King("White", 26))
 # chessboard.gameTiles[17] = Tile(17, Man("White", 17))
 # chessboard.gameTiles[35] = Tile(35, Man("White", 35))
 # chessboard.gameTiles[8] = Tile(8, Man("Black", 8))
 # chessboard.gameTiles[33] = Tile(33, Man("White", 33))
 # chessboard.gameTiles[53] = Tile(53, Man("White", 53))
-#chessboard.printBoard()
-# print("\n")
-# logic.mozliwe_bicia(chessboard,wewnetrzne, bigVector)
-# #logic.mozliwy_ruch(chessboard,wewnetrzne, bigVector)
-# for x in bigVector:
-#    # print(x)
-#     for idx, tiles in enumerate(x):
-#         print('|', end=x[idx])
-#         count += 1
-#         if count == 8:
-#             print('|', end='\n')
-#             count = 0
-#     print("\n")
+chessboard.printBoard()
+print("\n")
+logic.mozliwe_ruchy_dla_czarnej_damy(bigVector, chessboard)
+logic.mozliwe_ruchy_dla_bialej_damy(bigVector, chessboard)
+#logic.mozliwe_bicia(chessboard,wewnetrzne, bigVector)
+#logic.mozliwy_ruch(chessboard,wewnetrzne, bigVector)
+for x in bigVector:
+    print('', '\n')
+    for idx, tiles in enumerate(x):
+        print('|', end=x[idx])
+        count += 1
+        if count == 8:
+            print('|', end='\n')
+            count = 0
+    print("\n")
 
 def points():
     PointsW=0

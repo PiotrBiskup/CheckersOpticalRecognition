@@ -443,7 +443,209 @@ def wiecej_bic_for_one_dla_bialych(bigVector, wewnetrzne,x):
             del wewnetrzne[:]
             zaszly_zmiany = 1
 
-def mozliwe_bicia_dla_bialej_damy(chessboard, bigVector):
+def mozliwe_ruchy_dla_czarnej_damy(bigVector,chessboard):
+    zaszly_zmiany = 0
+    wewnetrzne = []
+    for z in range(64):
+        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+
+    for x in range(64):
+        if zaszly_zmiany == 1:
+            for z in range(64):
+                wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+            zaszly_zmiany = 0
+
+        if chessboard.gameTiles[x].pieceOnTile.toString() == 'BK':
+            if x == 7:
+                if chessboard.gameTiles[x + 7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 7] = 'BK'
+                    zaszly_zmiany = 1
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+            if x == 56:
+                if chessboard.gameTiles[x - 7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 7] = 'BK'
+                    zaszly_zmiany = 1
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+            elif x == 8 or x == 24 or x == 40:
+                if chessboard.gameTiles[x + 9].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 9] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+                if chessboard.gameTiles[x -7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 7] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    zaszly_zmiany = 1
+            elif x == 23 or x == 39 or x == 55:
+                if chessboard.gameTiles[x - 9].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 9] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+                if chessboard.gameTiles[x + 7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 7] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    zaszly_zmiany = 1
+            elif x == 1 or x == 3 or x == 5:
+                if chessboard.gameTiles[x + 9].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 9] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+                if chessboard.gameTiles[x + 7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 7] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    zaszly_zmiany = 1
+
+            else:
+                if chessboard.gameTiles[x + 9].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 9] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+                if chessboard.gameTiles[x + 7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 7] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+                if chessboard.gameTiles[x - 7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 7] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+                if chessboard.gameTiles[x - 9].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 9] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+
+def mozliwe_ruchy_dla_bialej_damy(bigVector,chessboard):
+    zaszly_zmiany = 0
+    wewnetrzne = []
+    for z in range(64):
+        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+
+    for x in range(64):
+        if zaszly_zmiany == 1:
+            for z in range(64):
+                wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+            zaszly_zmiany = 0
+
+        if chessboard.gameTiles[x].pieceOnTile.toString() == 'WK':
+            if x == 7:
+                if chessboard.gameTiles[x + 7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 7] = 'WK'
+                    zaszly_zmiany = 1
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+            if x == 56:
+                if chessboard.gameTiles[x - 7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 7] = 'WK'
+                    zaszly_zmiany = 1
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+            elif x == 8 or x == 24 or x == 40:
+                if chessboard.gameTiles[x + 9].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 9] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+                if chessboard.gameTiles[x -7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 7] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    zaszly_zmiany = 1
+            elif x == 23 or x == 39 or x == 55:
+                if chessboard.gameTiles[x - 9].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 9] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+                if chessboard.gameTiles[x + 7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 7] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    zaszly_zmiany = 1
+            elif x == 1 or x == 3 or x == 5:
+                if chessboard.gameTiles[x + 9].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 9] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+                if chessboard.gameTiles[x + 7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 7] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    zaszly_zmiany = 1
+
+            else:
+                if chessboard.gameTiles[x + 9].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 9] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+                if chessboard.gameTiles[x + 7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 7] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+                if chessboard.gameTiles[x - 7].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 7] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+                if chessboard.gameTiles[x - 9].pieceOnTile.toString() == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 9] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+
+
+
+def mozliwe_bicia_dla_czarnej_damy(chessboard, bigVector):
     wewnetrzne = []
     zaszly_zmiany = 0
 
@@ -457,15 +659,16 @@ def mozliwe_bicia_dla_bialej_damy(chessboard, bigVector):
                 wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
             zaszly_zmiany = 0
 
-        if wewnetrzne[x] == 'BM' and (x == 7 or x == 23 or x == 39 or x == 14 or x == 30 or x == 46):
+        if wewnetrzne[x] == 'BK' and (x == 7 or x == 23 or x == 39 or x == 14 or x == 30 or x == 46):
             if wewnetrzne[x + 7] == 'WM' and wewnetrzne[x + 14] == 'n':
                         wewnetrzne[x] = 'n'
                         wewnetrzne[x + 7] = 'n'
-                        wewnetrzne[x+14] = 'BM'
+                        wewnetrzne[x+14] = 'BK'
                         zaszly_zmiany = 1
                         wiecej_bic_for_one(bigVector, wewnetrzne,x+14)
                         bigVector.append(wewnetrzne.copy())
                         del wewnetrzne[:]
+
             elif wewnetrzne[x + 7] == 'WK' and wewnetrzne[x + 14] == 'n':
                 wewnetrzne[x] = 'n'
                 wewnetrzne[x + 7] = 'n'
