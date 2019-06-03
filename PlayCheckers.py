@@ -108,7 +108,7 @@ def SeeMove(currentTiles):
             #mozliwe bicie
         if see==4:
             correct=False
-            message = "niemozliwy ruch"
+            # message = "niemozliwy ruch"
             #wypisz bledny ruch
 
 
@@ -194,22 +194,22 @@ bigVector=[]
 #chessboard.gameTiles[37] = Tile(37, King("White", 37))
 # chessboard.gameTiles[19] = Tile(19, Man("White", 19))
 # chessboard.gameTiles[35] = Tile(35, Man("White", 35))
-# chessboard.gameTiles[8] = Tile(8, Man("Black", 8))
-# chessboard.gameTiles[33] = Tile(33, Man("White", 33))
-# chessboard.gameTiles[26] = Tile(26, Man("White", 26))
+# chessboard.gameTiles[14] = Tile(14, Man("Black", 14))
+# chessboard.gameTiles[49] = Tile(49, Man("White", 49))
+# chessboard.gameTiles[35] = Tile(35, Man("White", 35))
+# chessboard.gameTiles[21] = Tile(21, Man("White", 21))
 # #chessboard.gameTiles[44] = Tile(44, Man("White", 4))
 # chessboard.gameTiles[17] = Tile(17, Man("Black", 17))
-# # chessboard.printBoard()
+# chessboard.printBoard()
 # print("\n")
-
+#
 # logic.Generator_bialych(chessboard,ruchy,bicia,wielokrotne)
 # logic.Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
 # chessboard.gameTiles[17] = Tile(17, NullPiece())
 # chessboard.gameTiles[26] = Tile(26, NullPiece())
 # chessboard.gameTiles[35] = Tile(35, Man("Black", 35))
 # print(logic.Komunikaty(chessboard,ruchy,bicia,wielokrotne))
-
-# for x in ruchy:
+# for x in bicia:
 #     print('', '\n')
 #     for idx, tiles in enumerate(x):
 #         print('|', end=x[idx])
@@ -218,6 +218,18 @@ bigVector=[]
 #             print('|', end='\n')
 #             count = 0
 #     print("\n")
+#
+# print("a teraz wielokrotne",'\n')
+# for x in wielokrotne:
+#     print('', '\n')
+#     for idx, tiles in enumerate(x):
+#         print('|', end=x[idx])
+#         count += 1
+#         if count == 8:
+#             print('|', end='\n')
+#             count = 0
+#     print("\n")
+#
 
 def points():
     PointsW=0
@@ -305,7 +317,7 @@ while not quitGame:
 
                         counter = 0
                         list_of_eight_prev = []
-                        prev = tab
+                        # prev = tab
                     else:
                         counter = 0
                         list_of_eight_prev = []
