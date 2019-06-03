@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="a001f16e-da73-4f7c-adf5-be6b34477efe" name="Default" comment="newBoard - working&#10;SeeMove - needs to be called when the move is made.">
       <change beforePath="$PROJECT_DIR$/.idea/CheckersRecognition.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CheckersRecognition.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logic/logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logic/logic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlayCheckers.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlayCheckers.py" afterDir="false" />
+=======
+    <list default="true" id="a001f16e-da73-4f7c-adf5-be6b34477efe" name="Default" comment="GoBack - needs check">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,8 +107,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PlayCheckers.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="165">
               <caret line="195" column="59" lean-forward="true" selection-start-line="195" selection-start-column="59" selection-end-line="195" selection-end-column="59" />
+=======
+            <state relative-caret-position="158">
+              <caret line="47" selection-start-line="47" selection-end-line="47" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -363,7 +373,14 @@
       <option name="project" value="LOCAL" />
       <updated>1559049474790</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="GoBack - needs check">
+      <created>1559153527195</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1559153527196</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -376,8 +393,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< Updated upstream
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
+=======
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+>>>>>>> Stashed changes
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4925926" visible="true" weight="0.24983476" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -398,6 +419,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
+<<<<<<< Updated upstream
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
       <list>
@@ -418,6 +440,15 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+=======
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Second Table with current positions added.&#10;Comparing current positions with current display.&#10;Calculating move of a piece." />
+    <MESSAGE value="Changed logic (compare) via Michal" />
+    <MESSAGE value="Notifications and points counter." />
+    <MESSAGE value="newBoard - working&#10;SeeMove - needs to be called when the move is made." />
+    <MESSAGE value="GoBack - needs check" />
+    <option name="LAST_COMMIT_MESSAGE" value="GoBack - needs check" />
+>>>>>>> Stashed changes
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
@@ -507,8 +538,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PlayCheckers.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="165">
           <caret line="195" column="59" lean-forward="true" selection-start-line="195" selection-start-column="59" selection-end-line="195" selection-end-column="59" />
+=======
+        <state relative-caret-position="158">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
