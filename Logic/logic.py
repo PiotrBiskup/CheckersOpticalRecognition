@@ -269,12 +269,13 @@ def wiecej_bic_for_one(bigVector, wewnetrzne,x):
             wewnetrzne[x + 18] = 'BM'
             wiecej_bic_for_one(bigVector, wewnetrzne, x + 18)
             bigVector.append(wewnetrzne.copy())
-
+            del wewnetrzne[:]
             wewnetrzne2[x] = 'n'
             wewnetrzne2[x + 7] = 'n'
             wewnetrzne2[x + 14] = 'BM'
             wiecej_bic_for_one(bigVector, wewnetrzne2, x + 14)
             bigVector.append(wewnetrzne2.copy())
+            del wewnetrzne2[:]
         elif wewnetrzne[x + 9] == 'WK' and wewnetrzne[x + 18] == 'n' and wewnetrzne[x + 7] == 'WK' and wewnetrzne[x + 14] == 'n':
             wewnetrzne2 = wewnetrzne [:]
             wewnetrzne[x] = 'n'
@@ -282,11 +283,13 @@ def wiecej_bic_for_one(bigVector, wewnetrzne,x):
             wewnetrzne[x + 18] = 'BM'
             wiecej_bic_for_one(bigVector, wewnetrzne, x + 18)
             bigVector.append(wewnetrzne.copy())
+            del wewnetrzne[:]
             wewnetrzne2[x] = 'n'
             wewnetrzne2[x + 7] = 'n'
             wewnetrzne2[x + 14] = 'BM'
             wiecej_bic_for_one(bigVector, wewnetrzne2, x + 14)
             bigVector.append(wewnetrzne2.copy())
+            del wewnetrzne2[:]
         elif wewnetrzne[x + 9] == 'WM' and wewnetrzne[x + 18] == 'n':
             wewnetrzne[x] = 'n'
             wewnetrzne[x + 9] = 'n'
@@ -448,12 +451,14 @@ def wiecej_bic_for_one_dla_bialych(bigVector, wewnetrzne,x):
             wewnetrzne[x - 18] = 'WM'
             wiecej_bic_for_one(bigVector, wewnetrzne, x - 18)
             bigVector.append(wewnetrzne.copy())
+            del wewnetrzne [:]
 
             wewnetrzne2[x] = 'n'
             wewnetrzne2[x - 7] = 'n'
             wewnetrzne2[x - 14] = 'WM'
             wiecej_bic_for_one(bigVector, wewnetrzne2, x - 14)
             bigVector.append(wewnetrzne2.copy())
+            del wewnetrzne2[:]
         if (wewnetrzne[x - 9] == 'BK' or wewnetrzne[x - 9] == 'BM') and wewnetrzne[x - 18] == 'n' and (wewnetrzne[x - 7] == 'BK' or wewnetrzne[x - 7] == 'BM')  and wewnetrzne[x - 14] == 'n':
             wewnetrzne2 = wewnetrzne [:]
             wewnetrzne[x] = 'n'
@@ -461,13 +466,13 @@ def wiecej_bic_for_one_dla_bialych(bigVector, wewnetrzne,x):
             wewnetrzne[x - 18] = 'WM'
             wiecej_bic_for_one(bigVector, wewnetrzne, x - 18)
             bigVector.append(wewnetrzne.copy())
-
+            del wewnetrzne[:]
             wewnetrzne2[x] = 'n'
             wewnetrzne2[x - 7] = 'n'
             wewnetrzne2[x - 14] = 'WM'
             wiecej_bic_for_one(bigVector, wewnetrzne2, x - 14)
             bigVector.append(wewnetrzne2.copy())
-
+            del wewnetrzne2[:]
         elif (wewnetrzne[x - 9] == 'BM' or wewnetrzne[x - 9] == 'BK') and wewnetrzne[x - 18] == 'n':
             wewnetrzne[x] = 'n'
             wewnetrzne[x - 9] = 'n'

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a001f16e-da73-4f7c-adf5-be6b34477efe" name="Default" comment="newBoard - working&#10;SeeMove - needs to be called when the move is made.">
-      <change beforePath="$PROJECT_DIR$/.idea/CheckersRecognition.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CheckersRecognition.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a001f16e-da73-4f7c-adf5-be6b34477efe" name="Default" comment="Holy cow, logic works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logic/logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logic/logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlayCheckers.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlayCheckers.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +19,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CheckersRecognition.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
+            <state relative-caret-position="2397">
               <caret line="141" column="52" selection-start-line="141" selection-start-column="52" selection-end-line="141" selection-end-column="52" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
@@ -65,25 +62,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Logic/logic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="28" selection-start-line="28" selection-end-line="28" />
+            <state relative-caret-position="342">
+              <caret line="311" column="27" lean-forward="true" selection-start-line="311" selection-start-column="27" selection-end-line="311" selection-end-column="27" />
               <folding>
                 <element signature="e#131#256#0" />
                 <element signature="e#400#718#0" />
+                <element signature="e#776#1687#0" />
+                <element signature="e#1466#1673#0" />
+                <element signature="e#1066#1273#0" />
                 <element signature="e#767#2644#0" />
                 <element signature="e#2694#4461#0" />
                 <element signature="e#4242#8662#0" />
-                <element signature="e#8730#12954#0" />
                 <element signature="e#8722#13200#0" />
                 <element signature="e#17548#21324#0" />
                 <element signature="e#21388#26180#0" />
                 <element signature="e#26243#31035#0" />
                 <element signature="e#31103#39982#0" />
                 <element signature="e#40082#48054#0" />
-                <element signature="e#48230#57279#0" />
                 <element signature="e#57343#65236#0" />
               </folding>
             </state>
@@ -99,7 +97,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PlayCheckers.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
@@ -167,8 +165,8 @@
       <list>
         <option value="$PROJECT_DIR$/CheckersRecognition.py" />
         <option value="$PROJECT_DIR$/szukanie_kolorow.py" />
-        <option value="$PROJECT_DIR$/Logic/logic.py" />
         <option value="$PROJECT_DIR$/PlayCheckers.py" />
+        <option value="$PROJECT_DIR$/Logic/logic.py" />
       </list>
     </option>
   </component>
@@ -363,7 +361,21 @@
       <option name="project" value="LOCAL" />
       <updated>1559049474790</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Holy cow, logic works">
+      <created>1559506337935</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1559506337935</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Holy cow, logic works">
+      <created>1559545437735</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1559545437735</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -379,13 +391,13 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4925926" visible="true" weight="0.24983476" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4925926" visible="true" weight="0.24983476" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5074074" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.04249292" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39943343" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
@@ -407,6 +419,10 @@
         <option value="1" />
       </list>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Holy cow, logic works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Holy cow, logic works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -436,16 +452,6 @@
     <entry file="file://$PROJECT_DIR$/Pieces/Piece.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/CheckersRecognition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="141" column="52" selection-start-line="141" selection-start-column="52" selection-end-line="141" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ChessArt/WM.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -455,6 +461,23 @@
           <caret line="2" selection-start-line="2" selection-end-line="2" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pieces/NullPiece.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="30" lean-forward="true" selection-start-column="30" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PlayCheckers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="195" column="59" lean-forward="true" selection-start-line="195" selection-start-column="59" selection-end-line="195" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -475,42 +498,36 @@
     <entry file="file://$PROJECT_DIR$/Board/Tile.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Pieces/NullPiece.py">
+    <entry file="file://$PROJECT_DIR$/CheckersRecognition.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="30" lean-forward="true" selection-start-column="30" selection-end-column="30" />
+        <state relative-caret-position="2397">
+          <caret line="141" column="52" selection-start-line="141" selection-start-column="52" selection-end-line="141" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Logic/logic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="342">
+          <caret line="311" column="27" lean-forward="true" selection-start-line="311" selection-start-column="27" selection-end-line="311" selection-end-column="27" />
           <folding>
             <element signature="e#131#256#0" />
             <element signature="e#400#718#0" />
+            <element signature="e#776#1687#0" />
+            <element signature="e#1466#1673#0" />
+            <element signature="e#1066#1273#0" />
             <element signature="e#767#2644#0" />
             <element signature="e#2694#4461#0" />
             <element signature="e#4242#8662#0" />
-            <element signature="e#8730#12954#0" />
             <element signature="e#8722#13200#0" />
             <element signature="e#17548#21324#0" />
             <element signature="e#21388#26180#0" />
             <element signature="e#26243#31035#0" />
             <element signature="e#31103#39982#0" />
             <element signature="e#40082#48054#0" />
-            <element signature="e#48230#57279#0" />
             <element signature="e#57343#65236#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PlayCheckers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="195" column="59" lean-forward="true" selection-start-line="195" selection-start-column="59" selection-end-line="195" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
