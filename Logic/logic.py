@@ -27,12 +27,14 @@ def Komunikaty(chessboard,ruchy,bicia,wielokrotne):
         if y==tocompare and not wielokrotne:
             return 1             #jezeli jest bicie, a wielokrotnego nie ma, to git
         elif y==tocompare:
-            return 2            #jak jest bicie, ale mogloby byc wielokrotne, to nie git :/
+            return "2"            #jak jest bicie, ale mogloby byc wielokrotne, to nie git :/
     for y in ruchy:
         if y==tocompare and ((not wielokrotne) or (not bicia)):
             return 1  #git
         elif y==tocompare:
             return 3             #mozliwe bicie jakiekolwiek, nie git
+    #Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
+    #Generator_bialych(chessboard, ruchy, bicia, wielokrotne)
     return 4           #jak nie znalezlismy, to walic to
 
 
