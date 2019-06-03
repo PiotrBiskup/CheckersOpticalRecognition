@@ -181,7 +181,7 @@ def find_checkers(image):
             # draw the center of the circle
             cv2.circle(img_circles, (i[0], i[1]), 2, (0, 0, 255), 3)
 
-        cv2.imshow('obrazek', img_circles)
+        # cv2.imshow('obrazek', img_circles)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
@@ -225,19 +225,19 @@ def find_colored_checkers(image, checkers, squares):
     erosion_white = cv2.erode(mask_white, kernel, iterations=1)
     dilation_white = cv2.dilate(erosion_white, kernel, iterations=1)
 
-    cv2.imshow('w', dilation_white)
+    # cv2.imshow('w', dilation_white)
 
     mask_pink = cv2.inRange(hsv, lower_pink, upper_pink)
     erosion_pink = cv2.erode(mask_pink, kernel_color, iterations=1)
     dilation_pink = cv2.dilate(erosion_pink, kernel, iterations=1)
 
-    cv2.imshow('p', dilation_pink)
+    # cv2.imshow('p', dilation_pink)
 
     mask_green = cv2.inRange(hsv, lower_dark_green, upper_dark_green)
     erosion_green = cv2.erode(mask_green, kernel_color, iterations=1)
     dilation_green = cv2.dilate(erosion_green, kernel, iterations=1)
 
-    cv2.imshow('g', dilation_green)
+    # cv2.imshow('g', dilation_green)
 
     for checker in checkers:
         x1 = checker[0] - 15
@@ -331,57 +331,57 @@ def check_if_was_move(source, list_of_eight_after_source):
         return False
 
 
-cap = cv2.VideoCapture(4)
-
-move_counter = 0
-counter = 0
-avoid_first_frame = 1
-prev = []
-list_of_eight_prev = []
-
-while cap.isOpened():
-    ret, frame = cap.read()
-
-    if ret:
-        tab, img_transf = run_all(frame)
-        cv2.imshow('frame', frame)
-        if tab is not None and img_transf is not None:
-            cv2.imshow('lol', img_transf)
-            if avoid_first_frame == 1:
-
-                prev = tab
-                avoid_first_frame += 1
-
-            else:
-                if prev != tab:
-                    if counter == 0:
-                        prev = tab
-                        counter += 1
-                    else:
-                        list_of_eight_prev.append(tab)
-                        counter += 1
-                else:
-                    if counter > 0:
-                        list_of_eight_prev.append(tab)
-                        counter += 1
-
-            if counter == 8:
-                if check_if_was_move(prev, list_of_eight_prev):
-                    move_counter += 1
-                    print(str(move_counter) + '------------------------RUCH--------------------------------------------------------------')
-                    counter = 0
-                    list_of_eight_prev = []
-                    prev = tab
-                else:
-                    counter = 0
-                    list_of_eight_prev = []
-                    prev = tab
-
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-
-    else:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
+# cap = cv2.VideoCapture(4)
+#
+# move_counter = 0
+# counter = 0
+# avoid_first_frame = 1
+# prev = []
+# list_of_eight_prev = []
+#
+# while cap.isOpened():
+#     ret, frame = cap.read()
+#
+#     if ret:
+#         tab, img_transf = run_all(frame)
+#         # cv2.imshow('frame', frame)
+#         if tab is not None and img_transf is not None:
+#             # cv2.imshow('lol', img_transf)
+#             if avoid_first_frame == 1:
+#
+#                 prev = tab
+#                 avoid_first_frame += 1
+#
+#             else:
+#                 if prev != tab:
+#                     if counter == 0:
+#                         prev = tab
+#                         counter += 1
+#                     else:
+#                         list_of_eight_prev.append(tab)
+#                         counter += 1
+#                 else:
+#                     if counter > 0:
+#                         list_of_eight_prev.append(tab)
+#                         counter += 1
+#
+#             if counter == 8:
+#                 if check_if_was_move(prev, list_of_eight_prev):
+#                     move_counter += 1
+#                     print(str(move_counter) + '------------------------RUCH--------------------------------------------------------------')
+#                     counter = 0
+#                     list_of_eight_prev = []
+#                     prev = tab
+#                 else:
+#                     counter = 0
+#                     list_of_eight_prev = []
+#                     prev = tab
+#
+#         if cv2.waitKey(1) & 0xFF == ord('q'):
+#             break
+#
+#     else:
+#         break
+#
+# cap.release()
+# cv2.destroyAllWindows()

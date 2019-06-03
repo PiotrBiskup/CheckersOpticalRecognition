@@ -6,6 +6,9 @@ from Pieces.Man import Man
 from Pieces.King import King
 from Pieces.NullPiece import NullPiece
 import Logic.logic as logic
+import cv2
+import numpy as np
+import CheckersRecognition as cr
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((600,680))#((600,680))
@@ -15,7 +18,9 @@ clock = pygame.time.Clock()
 chessboard = Board()
 chessboard.createBoard()
 # chessboard.printBoard()
-
+ruchy = []
+bicia =[]
+wielokrotne =[]
 allTiles = []
 allPieces = []
 currentTiles = []
@@ -86,14 +91,25 @@ def newBoard(lastMove):
 
 #need to check that...
 def SeeMove(currentTiles):
-        see = logic.Compare(chessboard,bigVector)
-        if (see == True):
-            correct == True
+        see = logic.Komunikaty(chessboard,ruchy,bicia,wielokrotne)
+        if (see == 1):
+            correct = True
             newBoard(lastMove)
+            message = "Poprawny ruch"
         #temp # need to add notifications
-        if (see == False):
-            correct == False
+        if (see == 2):
+            correct = False
+            message = "mozliwe wielokrotne bicie"
+            #mozliwe wielokrotne bicie
             #notification
+        if see==3:
+            correct =False
+            message = "mozliwe bicie"
+            #mozliwe bicie
+        if see==4:
+            correct=False
+            message = "niemozliwy ruch"
+            #wypisz bledny ruch
 
 
 def drawPieces():
@@ -164,10 +180,10 @@ bigVector=[]
 # chessboard.gameTiles[5] = Tile(5, NullPiece())
 # chessboard.gameTiles[5] = Tile(5, NullPiece())
 # chessboard.gameTiles[3] = Tile(3, NullPiece())
-drawPieces()
-for x in range(64):
-    chessboard.gameTiles[x] = Tile(x, NullPiece())
-print("\n")
+# drawPieces()
+# for x in range(64):
+#     chessboard.gameTiles[x] = Tile(x, NullPiece())
+# print("\n")
 # chessboard.gameTiles[8] = Tile(8, King("Black", 8))
 # # chessboard.gameTiles[56] = Tile(56, King("Black", 56))
 
@@ -180,20 +196,18 @@ print("\n")
 # chessboard.gameTiles[35] = Tile(35, Man("White", 35))
 # chessboard.gameTiles[8] = Tile(8, Man("Black", 8))
 # chessboard.gameTiles[33] = Tile(33, Man("White", 33))
-chessboard.gameTiles[26] = Tile(26, Man("White", 26))
-#chessboard.gameTiles[44] = Tile(44, Man("White", 4))
-chessboard.gameTiles[17] = Tile(17, Man("Black", 17))
-# chessboard.printBoard()
-print("\n")
-ruchy = []
-bicia =[]
-wielokrotne =[]
-logic.Generator_bialych(chessboard,ruchy,bicia,wielokrotne)
-logic.Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
-chessboard.gameTiles[17] = Tile(17, NullPiece())
-chessboard.gameTiles[26] = Tile(26, NullPiece())
-chessboard.gameTiles[35] = Tile(35, Man("Black", 35))
-print(logic.Komunikaty(chessboard,ruchy,bicia,wielokrotne))
+# chessboard.gameTiles[26] = Tile(26, Man("White", 26))
+# #chessboard.gameTiles[44] = Tile(44, Man("White", 4))
+# chessboard.gameTiles[17] = Tile(17, Man("Black", 17))
+# # chessboard.printBoard()
+# print("\n")
+
+# logic.Generator_bialych(chessboard,ruchy,bicia,wielokrotne)
+# logic.Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
+# chessboard.gameTiles[17] = Tile(17, NullPiece())
+# chessboard.gameTiles[26] = Tile(26, NullPiece())
+# chessboard.gameTiles[35] = Tile(35, Man("Black", 35))
+# print(logic.Komunikaty(chessboard,ruchy,bicia,wielokrotne))
 
 # for x in ruchy:
 #     print('', '\n')
@@ -235,6 +249,19 @@ textB = font.render(bMessage, True, (0, 128, 0))
 
 quitGame = False
 n = 0
+
+
+#Przetwarzanie obrazu
+
+cap = cv2.VideoCapture(4)
+
+move_counter = 0
+counter = 0
+avoid_first_frame = 1
+prev = []
+list_of_eight_prev = []
+
+
 while not quitGame:
     # if n==0:
     #     time.sleep(7)
@@ -243,6 +270,49 @@ while not quitGame:
             quitGame = True
             pygame.quit()
             quit()
+
+    if cap.isOpened():
+        ret, frame = cap.read()
+        if ret:
+            tab, img_transf = cr.run_all(frame)
+            # cv2.imshow('frame', frame)
+            if tab is not None and img_transf is not None:
+                # cv2.imshow('lol', img_transf)
+                if avoid_first_frame == 1:
+
+                    prev = tab
+                    avoid_first_frame += 1
+
+                else:
+                    if prev != tab:
+                        if counter == 0:
+                            prev = tab
+                            counter += 1
+                        else:
+                            list_of_eight_prev.append(tab)
+                            counter += 1
+                    else:
+                        if counter > 0:
+                            list_of_eight_prev.append(tab)
+                            counter += 1
+
+                if counter == 8:
+                    if cr.check_if_was_move(prev, list_of_eight_prev):
+                        move_counter += 1
+                        logic.Generator_bialych(chessboard,ruchy,bicia,wielokrotne)
+                        logic.Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
+                        currentTiles = prev
+
+                        counter = 0
+                        list_of_eight_prev = []
+                        prev = tab
+                    else:
+                        counter = 0
+                        list_of_eight_prev = []
+                        prev = tab
+
+
+
 
     gameDisplay.fill((128,128,128))
 
@@ -285,3 +355,7 @@ while not quitGame:
     allPieces = []
 
     clock.tick(60)
+
+
+cap.release()
+cv2.destroyAllWindows()
