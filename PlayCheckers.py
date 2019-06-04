@@ -110,7 +110,7 @@ def SeeMove(currentTiles):
             correct=False
             # message = "niemozliwy ruch"
             #wypisz bledny ruch
-
+        text = font.render(message, True, (0, 128, 0))
 
 def drawPieces():
     xpos = 0
@@ -231,6 +231,7 @@ bigVector=[]
 #     print("\n")
 #
 
+
 def points():
     PointsW=0
     PointsB=0
@@ -247,6 +248,7 @@ def points():
 # drawPieces()
 
 message = "All good"
+#message = "lol"
 font = pygame.font.SysFont("arial", 30)
 text = font.render(message, True, (0, 128, 0))
 
@@ -293,6 +295,8 @@ while not quitGame:
                 if avoid_first_frame == 1:
 
                     prev = tab
+                    currentTiles = tab
+
                     avoid_first_frame += 1
 
                 else:
@@ -315,9 +319,14 @@ while not quitGame:
                         logic.Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
                         currentTiles = prev
 
+                        if correct:
+                            SeeMove(currentTiles)
+                        else:
+                            GoBack(currentTiles)
+
                         counter = 0
                         list_of_eight_prev = []
-                        # prev = tab
+                        prev = tab
                     else:
                         counter = 0
                         list_of_eight_prev = []
@@ -355,13 +364,7 @@ while not quitGame:
         gameDisplay.blit(img[0], img[1])
 
     pygame.display.update()
-    time.sleep(1)
-
-    if (correct == True):
-        SeeMove(currentTiles)
-    if (correct == False):
-        GoBack(currentTiles)
-
+    # time.sleep(1)
 
     allTiles = []
     allPieces = []
