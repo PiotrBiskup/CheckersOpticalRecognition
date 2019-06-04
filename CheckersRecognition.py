@@ -10,7 +10,7 @@ upper_pink = np.array([179, 255, 255])
 lower_dark_green = np.array([50, 60, 60])
 upper_dark_green = np.array([80, 255, 255])
 
-lower_yellow = np.array([20, 100, 100])
+lower_yellow = np.array([20, 100, 100])  #20 100 100
 upper_yellow = np.array([50, 255, 255])
 
 lower_blue = np.array([84, 100, 100])  # 100,50,50  100, 70, 70     84,100,100
@@ -22,6 +22,7 @@ def check_edges(hsv_image):
     kernel = np.ones((4, 4), np.uint8)
     erosion = cv2.erode(mask, kernel, iterations=1)
     dilation = cv2.dilate(erosion, kernel, iterations=1)
+    cv2.imshow('znaczniki', dilation)
     image, contours, hierarchy = cv2.findContours(dilation, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     img2 = cv2.drawContours(image, contours, -1, (128, 255, 187), 3)
 
@@ -325,7 +326,7 @@ def check_if_was_move(source, list_of_eight_after_source):
         if x == source:
             cnt += 1
 
-    if cnt > 4:
+    if cnt > 5:
         return True
     else:
         return False
