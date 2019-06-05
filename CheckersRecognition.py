@@ -102,7 +102,7 @@ def board_perspective_transform(source_image):
 
     dilation = cv2.dilate(erosion, kernel, iterations=1)
 
-    # cv2.imshow('obrazek', dilation)
+    # cv2.imshow('rogi', dilation)
     # cv2.waitKey(0)
 
     # znalezienie konturow
@@ -181,7 +181,7 @@ def find_checkers(image):
             # draw the center of the circle
             cv2.circle(img_circles, (i[0], i[1]), 2, (0, 0, 255), 3)
 
-        # cv2.imshow('obrazek', img_circles)
+        cv2.imshow('obrazek', img_circles)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 

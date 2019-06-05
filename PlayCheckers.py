@@ -44,7 +44,7 @@ currentTiles = []
 # currentTiles[0] = Tile(0, Man("Black", 0))
 # currentTiles[1] = Tile(1, NullPiece())
 
-currentTiles = ['n', 'n', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'n', 'BM', 'n', 'BM', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n','n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n']
+#currentTiles = ['n', 'n', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'BM', 'n', 'n', 'BM', 'n', 'BM', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'BM', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n','n', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'WM', 'n', 'WM', 'n', 'WM', 'n', 'WM', 'n']
 lastMove = "Black"
 correct = True
 ##########################
@@ -73,7 +73,6 @@ def GoBack(currentTiles):
 def newBoard(lastMove):
     n=0
     for gameTile in currentTiles:
-        n+=1
         if(gameTile == 'n'):
             chessboard.gameTiles[n] = Tile(n, NullPiece())
         if (gameTile == 'BM'):
@@ -84,6 +83,7 @@ def newBoard(lastMove):
             chessboard.gameTiles[n] = Tile(n, Man("White",n))
         if (gameTile == 'WK'):
             chessboard.gameTiles[n] = Tile(n, King("White",n))
+        n += 1
     if (lastMove == "Black"):
         lastMove = "White"
     if (lastMove == "White"):
@@ -110,7 +110,7 @@ def SeeMove(currentTiles):
             correct=False
             # message = "niemozliwy ruch"
             #wypisz bledny ruch
-        text = font.render(message, True, (0, 128, 0))
+        # text = font.render(message, True, (0, 128, 0))
 
 def drawPieces():
     xpos = 0
@@ -160,7 +160,7 @@ def drawPieces():
 ##########################
 
 
-drawPieces()
+#drawPieces()
 
 for img in allPieces:
     gameDisplay.blit(img[0], img[1])
@@ -287,6 +287,7 @@ while not quitGame:
 
     if cap.isOpened():
         ret, frame = cap.read()
+        cv2.imshow("frame0", frame)
         if ret:
             tab, img_transf = cr.run_all(frame)
             # cv2.imshow('frame', frame)
@@ -296,7 +297,8 @@ while not quitGame:
 
                     prev = tab
                     currentTiles = tab
-
+                    newBoard("White")
+                    drawPieces()
                     avoid_first_frame += 1
 
                 else:
@@ -315,14 +317,17 @@ while not quitGame:
                 if counter == 8:
                     if cr.check_if_was_move(prev, list_of_eight_prev):
                         move_counter += 1
+                        print(str(move_counter) + " ==================================RUCH===========================")
                         logic.Generator_bialych(chessboard,ruchy,bicia,wielokrotne)
                         logic.Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
                         currentTiles = prev
+                        newBoard("Black")
 
-                        if correct:
-                            SeeMove(currentTiles)
-                        else:
-                            GoBack(currentTiles)
+
+                        # if correct:
+                        #     SeeMove(currentTiles)
+                        # else:
+                        #     GoBack(currentTiles)
 
                         counter = 0
                         list_of_eight_prev = []
@@ -334,9 +339,8 @@ while not quitGame:
 
 
 
-
     gameDisplay.fill((128,128,128))
-
+    drawPieces()
     PointsB, PointsW = points()
 
     wMessage = "W: " + str(PointsW)
@@ -351,7 +355,7 @@ while not quitGame:
     gameDisplay.blit(textB,
                      (600-text.get_width()//1.5, 680 - text.get_height() * 1.5))
 
-    drawPieces()
+
 
 
 
