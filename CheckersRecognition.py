@@ -19,9 +19,11 @@ upper_blue = np.array([104, 255, 255])  # 130,255,255      104,255,255
 
 def check_edges(hsv_image):
     mask = cv2.inRange(hsv_image, lower_yellow, upper_yellow)
-    kernel = np.ones((4, 4), np.uint8)
+    kernel = np.ones((10, 10), np.uint8)
     erosion = cv2.erode(mask, kernel, iterations=1)
     dilation = cv2.dilate(erosion, kernel, iterations=1)
+    # cv2.imshow('zolete', dilation)
+
     image, contours, hierarchy = cv2.findContours(dilation, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     img2 = cv2.drawContours(image, contours, -1, (128, 255, 187), 3)
 
@@ -94,7 +96,7 @@ def board_perspective_transform(source_image):
     # cv2.waitKey(0)
 
     # usuniecie zle wykrytych pojdynczych pikseli
-    kernel = np.ones((6, 6), np.uint8)
+    kernel = np.ones((10, 10), np.uint8)
     erosion = cv2.erode(mask, kernel, iterations=1)
 
     #cv2.imshow('ed', erosion)
@@ -218,7 +220,7 @@ def find_colored_checkers(image, checkers, squares):
 
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-    kernel = np.ones((30, 30), np.uint8)
+    kernel = np.ones((20, 20), np.uint8)
     kernel_color = np.ones((12, 12), np.uint8)
 
     mask_white = cv2.inRange(hsv, lower_white, upper_white)
@@ -268,7 +270,7 @@ def find_colored_checkers(image, checkers, squares):
         n_non_zero_p = cv2.countNonZero(crop_img_p)
         n_non_zero_g = cv2.countNonZero(crop_img_g)
 
-        if (n_non_zero_w / (height_w * width_w)) > 0.8:
+        if (n_non_zero_w / (height_w * width_w)) > 0.6:
             color = 'WM'
         elif (n_non_zero_p / (height_p * width_p)) > 0.6:
             color = 'WK'

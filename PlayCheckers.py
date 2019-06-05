@@ -93,20 +93,24 @@ def newBoard(lastMove):
 def SeeMove(currentTiles):
         see = logic.Komunikaty(chessboard,ruchy,bicia,wielokrotne)
         if (see == 1):
+            print("1")
             correct = True
             newBoard(lastMove)
             message = "Poprawny ruch"
         #temp # need to add notifications
         if (see == 2):
+            print("2")
             correct = False
             message = "mozliwe wielokrotne bicie"
             #mozliwe wielokrotne bicie
             #notification
         if see==3:
+            print("3")
             correct =False
             message = "mozliwe bicie"
             #mozliwe bicie
         if see==4:
+            print("4")
             correct=False
             # message = "niemozliwy ruch"
             #wypisz bledny ruch
@@ -318,16 +322,16 @@ while not quitGame:
                     if cr.check_if_was_move(prev, list_of_eight_prev):
                         move_counter += 1
                         print(str(move_counter) + " ==================================RUCH===========================")
-                        logic.Generator_bialych(chessboard,ruchy,bicia,wielokrotne)
-                        logic.Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
+                        # logic.Generator_bialych(chessboard,ruchy,bicia,wielokrotne)
+                        # logic.Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
                         currentTiles = prev
                         newBoard("Black")
 
 
-                        # if correct:
-                        #     SeeMove(currentTiles)
-                        # else:
-                        #     GoBack(currentTiles)
+                        if correct:
+                            SeeMove(currentTiles)
+                        else:
+                            GoBack(currentTiles)
 
                         counter = 0
                         list_of_eight_prev = []
