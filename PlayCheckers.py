@@ -68,6 +68,8 @@ def GoBack(currentTiles):
             break
         if (gameTile == chessboard.gameTiles[n].toString() and n == 63):
             correct = True
+            message = "W porządku"
+    return correct, message
 
 #please check...
 def newBoard(lastMove):
@@ -108,9 +110,9 @@ def SeeMove(currentTiles):
             #mozliwe bicie
         if see==4:
             correct=False
-            # message = "niemozliwy ruch"
+            message = "niemozliwy ruch"
             #wypisz bledny ruch
-        # text = font.render(message, True, (0, 128, 0))
+        return correct, message
 
 def drawPieces():
     xpos = 0
@@ -225,7 +227,7 @@ bigVector=[]
 #     for idx, tiles in enumerate(x):
 #         print('|', end=x[idx])
 #         count += 1
-#         if count == 8:
+#         if count == 8:Z
 #             print('|', end='\n')
 #             count = 0
 #     print("\n")
@@ -321,13 +323,15 @@ while not quitGame:
                         logic.Generator_bialych(chessboard,ruchy,bicia,wielokrotne)
                         logic.Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
                         currentTiles = prev
-                        newBoard("Black")
+                        #newBoard("Black")
+                        correct, message = SeeMove(currentTiles)
 
 
-                        # if correct:
-                        #     SeeMove(currentTiles)
-                        # else:
-                        #     GoBack(currentTiles)
+                        if correct:
+                            newBoard(lastMove)
+                        else:
+                            correct, message = GoBack(currentTiles)
+
 
                         counter = 0
                         list_of_eight_prev = []
@@ -348,6 +352,7 @@ while not quitGame:
     bMessage = "B: " + str(PointsB)
     textB = font.render(bMessage, True, (0, 128, 0))
 
+
     font = pygame.font.SysFont("arial", 30)
     text = font.render(message, True, (0, 128, 0))
 
@@ -360,8 +365,6 @@ while not quitGame:
 
 
 
-
-
     # if n == 0:
     #     ChangePosition("White", 44, 37)
     # if n != 0:
@@ -371,7 +374,7 @@ while not quitGame:
         gameDisplay.blit(img[0], img[1])
 
     pygame.display.update()
-    # time.sleep(1)
+    # time.sleep(1)g
 
     allTiles = []
     allPieces = []
