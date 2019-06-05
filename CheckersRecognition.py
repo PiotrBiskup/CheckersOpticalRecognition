@@ -325,7 +325,7 @@ def check_if_was_move(source, list_of_eight_after_source):
         if x == source:
             cnt += 1
 
-    if cnt > 4:
+    if cnt > 5:
         return True
     else:
         return False
