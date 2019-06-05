@@ -62,13 +62,15 @@ def square(x,y,w,h,color):
 def GoBack(currentTiles):
     n = 0
     for gameTile in currentTiles:
-        n += 1
-        if (gameTile != chessboard.gameTiles[n].toString()):
+
+        if (gameTile != chessboard.gameTiles[n].pieceOnTile.toString()):
             correct = False
+            message = "zły ruch"
             break
-        if (gameTile == chessboard.gameTiles[n].toString() and n == 63):
+        if (gameTile == chessboard.gameTiles[n].pieceOnTile.toString() and n == 63):
             correct = True
             message = "W porządku"
+        n += 1
     return correct, message
 
 #please check...
@@ -93,7 +95,7 @@ def newBoard(lastMove):
 
 #need to check that...
 def SeeMove(currentTiles):
-        see = logic.Komunikaty(chessboard,ruchy,bicia,wielokrotne)
+        see = logic.Komunikaty(currentTiles,ruchy,bicia,wielokrotne)
         if (see == 1):
             print("1")
             correct = True
@@ -326,23 +328,13 @@ while not quitGame:
                         print(str(move_counter) + " ==================================RUCH===========================")
                         # logic.Generator_bialych(chessboard,ruchy,bicia,wielokrotne)
                         # logic.Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
-                        currentTiles = prev
+                        currentTiles = prev.copy()
                         #newBoard("Black")
-                        correct, message = SeeMove(currentTiles)
-
 
                         if correct:
-                            newBoard(lastMove)
+                            correct, message = SeeMove(currentTiles)
                         else:
                             correct, message = GoBack(currentTiles)
-
-<<<<<<< HEAD
-                        if correct:
-                            SeeMove(currentTiles)
-                        else:
-                            GoBack(currentTiles)
-=======
->>>>>>> 156c7aa4a0f07edaac32e3e4d0321b70c3c72aa0
 
                         counter = 0
                         list_of_eight_prev = []

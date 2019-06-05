@@ -47,23 +47,23 @@ def Compare(chessboard, bigVector):                                          #mn
     return False
 
 def Komunikaty(chessboard,ruchy,bicia,wielokrotne):
-    tocompare = []
-    for z in range(64):
-        tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
+    #tocompare = []
+    # for z in range(64):
+    #     tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
     for y in wielokrotne:
-        if y==tocompare:
+        if y==chessboard:
             return 1            #jezeli jest wielokrotne bicie to git, nie ma nawet co wywalic
     for y in bicia:
-        if y==tocompare and not wielokrotne:
+        if y==chessboard and not wielokrotne:
             return 1             #jezeli jest bicie, a wielokrotnego nie ma, to git
-        elif y==tocompare:
+        elif y==chessboard:
             return 2            #jak jest bicie, ale mogloby byc wielokrotne, to nie git :/
     for y in ruchy:
-        if y==tocompare and ((not wielokrotne) or (not bicia)):
+        if y==chessboard and ((not wielokrotne) or (not bicia)):
             return 1  #git
-        if y==tocompare and not bicia:
+        if y==chessboard and not bicia:
             return 1
-        elif y==tocompare:
+        elif y==chessboard:
             return 3             #mozliwe bicie jakiekolwiek, nie git
     #Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
     #Generator_bialych(chessboard, ruchy, bicia, wielokrotne)
