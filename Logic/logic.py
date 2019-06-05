@@ -69,26 +69,26 @@ def Komunikaty(chessboard,ruchy,bicia,wielokrotne):
 
 
 def Generator_bialych(chessboard, ruchy, bicia, wielokrotne):
-    tocompare=[]
-    for z in range(64):
-        tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
-    ruchy.append(tocompare)
+    # tocompare=[]
+    # for z in range(64):
+    #     tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
+    # ruchy.append(tocompare)
     ruchy_bialych(chessboard,ruchy)
     mozliwe_bicia_dla_bialych(chessboard,bicia,wielokrotne)
     mozliwe_ruchy_dla_bialej_damy(ruchy,chessboard)
     mozliwe_bicia_dla_bialej_damy(chessboard,bicia,wielokrotne)
-    zamien_na_damki_biale(ruchy,bicia,wielokrotne)
+    # zamien_na_damki_biale(ruchy,bicia,wielokrotne)
 
 def Generator_czarnych(chessboard, ruchy, bicia, wielokrotne):
-    tocompare=[]
-    for z in range(64):
-        tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
-    ruchy.append(tocompare)
+    # tocompare=[]
+    # for z in range(64):
+    #     tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
+    # ruchy.append(tocompare)
     mozliwy_ruch(chessboard,ruchy)
     mozliwe_bicia(chessboard,bicia,wielokrotne)
     mozliwe_ruchy_dla_czarnej_damy(ruchy,chessboard)
     mozliwe_bicia_dla_czarnej_damy(chessboard,bicia,wielokrotne)
-    zamien_na_damki_czarne(ruchy,bicia,wielokrotne)
+    # zamien_na_damki_czarne(ruchy,bicia,wielokrotne)
 
 def mozliwy_ruch(chessboard, bigVector):
     zaszly_zmiany = 0
