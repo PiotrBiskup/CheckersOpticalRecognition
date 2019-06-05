@@ -247,8 +247,8 @@ def points():
 
 # drawPieces()
 
+global message
 message = "All good"
-#message = "lol"
 font = pygame.font.SysFont("arial", 30)
 text = font.render(message, True, (0, 128, 0))
 
@@ -347,6 +347,9 @@ while not quitGame:
     textW = font.render(wMessage, True, (0, 128, 0))
     bMessage = "B: " + str(PointsB)
     textB = font.render(bMessage, True, (0, 128, 0))
+
+    font = pygame.font.SysFont("arial", 30)
+    text = font.render(message, True, (0, 128, 0))
 
     gameDisplay.blit(text,
                 (300 - text.get_width() // 2, 680 - text.get_height()*1.5))
