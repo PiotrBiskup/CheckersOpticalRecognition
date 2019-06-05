@@ -3,6 +3,36 @@ def CreateTemps(chessboard, bigVector, tempboard):                         #magi
         tempboard.append(chessboard.gameTiles[x].pieceOnTile.toString())
     bigVector.append(tempboard)
 
+
+def zamien_na_damki_biale(ruchy,bicia,wielokrotne):
+    for y in ruchy:
+        for x in range (1,7):
+            if y[x]=='WM':
+                y[x]='WK'
+    for y in bicia:
+        for x in range(1, 7):
+            if y[x] == 'WM':
+                y[x] = 'WK'
+    for y in wielokrotne:
+        for x in range(1, 7):
+            if y[x] == 'WM':
+                y[x] = 'WK'
+
+def zamien_na_damki_czarne(ruchy,bicia,wielokrotne):
+    for y in ruchy:
+        for x in range (56,63):
+            if y[x]=='BM':
+                y[x]='BK'
+    for y in bicia:
+        for x in range(56,63):
+            if y[x] == 'BM':
+                y[x] = 'BK'
+    for y in wielokrotne:
+        for x in range(56,63):
+            if y[x] == 'BM':
+                y[x] = 'BK'
+
+
 def Compare(chessboard, bigVector):                                          #mniej magiczna funkcja sprawdzajaca obecny stan z tablicami
     #obecna = []
     tocompare=[]
@@ -39,17 +69,26 @@ def Komunikaty(chessboard,ruchy,bicia,wielokrotne):
 
 
 def Generator_bialych(chessboard, ruchy, bicia, wielokrotne):
+    tocompare=[]
+    for z in range(64):
+        tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
+    ruchy.append(tocompare)
     ruchy_bialych(chessboard,ruchy)
     mozliwe_bicia_dla_bialych(chessboard,bicia,wielokrotne)
     mozliwe_ruchy_dla_bialej_damy(ruchy,chessboard)
     mozliwe_bicia_dla_bialej_damy(chessboard,bicia,wielokrotne)
+    zamien_na_damki_biale(ruchy,bicia,wielokrotne)
 
 def Generator_czarnych(chessboard, ruchy, bicia, wielokrotne):
+    tocompare=[]
+    for z in range(64):
+        tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
+    ruchy.append(tocompare)
     mozliwy_ruch(chessboard,ruchy)
     mozliwe_bicia(chessboard,bicia,wielokrotne)
     mozliwe_ruchy_dla_czarnej_damy(ruchy,chessboard)
     mozliwe_bicia_dla_czarnej_damy(chessboard,bicia,wielokrotne)
-
+    zamien_na_damki_czarne(ruchy,bicia,wielokrotne)
 
 def mozliwy_ruch(chessboard, bigVector):
     zaszly_zmiany = 0
@@ -101,6 +140,7 @@ def ruchy_bialych(chessboard, bigVector):
     wewnetrzne = []
     for z in range(64):
         wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
+
 
     for x in range(64):
         if zaszly_zmiany == 1:
