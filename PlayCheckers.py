@@ -335,7 +335,7 @@ while not quitGame:
 
                         counter = 0
                         list_of_eight_prev = []
-                        prev = tab
+                        # prev = tab
                     else:
                         counter = 0
                         list_of_eight_prev = []

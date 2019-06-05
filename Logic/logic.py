@@ -61,6 +61,8 @@ def Komunikaty(chessboard,ruchy,bicia,wielokrotne):
     for y in ruchy:
         if y==tocompare and ((not wielokrotne) or (not bicia)):
             return 1  #git
+        if y==tocompare and not bicia:
+            return 1
         elif y==tocompare:
             return 3             #mozliwe bicie jakiekolwiek, nie git
     #Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
@@ -69,26 +71,26 @@ def Komunikaty(chessboard,ruchy,bicia,wielokrotne):
 
 
 def Generator_bialych(chessboard, ruchy, bicia, wielokrotne):
-    tocompare=[]
-    for z in range(64):
-        tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
-    ruchy.append(tocompare)
+    # tocompare=[]
+    # for z in range(64):
+    #     tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
+    # ruchy.append(tocompare)
     ruchy_bialych(chessboard,ruchy)
     mozliwe_bicia_dla_bialych(chessboard,bicia,wielokrotne)
     mozliwe_ruchy_dla_bialej_damy(ruchy,chessboard)
     mozliwe_bicia_dla_bialej_damy(chessboard,bicia,wielokrotne)
-    zamien_na_damki_biale(ruchy,bicia,wielokrotne)
+    # zamien_na_damki_biale(ruchy,bicia,wielokrotne)
 
 def Generator_czarnych(chessboard, ruchy, bicia, wielokrotne):
-    tocompare=[]
-    for z in range(64):
-        tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
-    ruchy.append(tocompare)
+    # tocompare=[]
+    # for z in range(64):
+    #     tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
+    # ruchy.append(tocompare)
     mozliwy_ruch(chessboard,ruchy)
     mozliwe_bicia(chessboard,bicia,wielokrotne)
     mozliwe_ruchy_dla_czarnej_damy(ruchy,chessboard)
     mozliwe_bicia_dla_czarnej_damy(chessboard,bicia,wielokrotne)
-    zamien_na_damki_czarne(ruchy,bicia,wielokrotne)
+    # zamien_na_damki_czarne(ruchy,bicia,wielokrotne)
 
 def mozliwy_ruch(chessboard, bigVector):
     zaszly_zmiany = 0
@@ -164,7 +166,7 @@ def ruchy_bialych(chessboard, bigVector):
                     del wewnetrzne[:]
                     zaszly_zmiany = 1
             elif x == 1 or x == 3 or x == 5 or x == 6:
-                print()
+                pass
 
             else:
                 if x > 8 and chessboard.gameTiles[x - 9].pieceOnTile.toString() == 'n':
@@ -231,7 +233,7 @@ def mozliwe_bicia(chessboard, bigVector, drugalista):
                 del wewnetrzne[:]
                 zaszly_zmiany = 1
         elif wewnetrzne[x] == 'BM' and (x == 56 or x == 58 or x == 60 or x == 62 or x==49 or x==51 or x==53 or x ==55):
-            print()
+            pass
         elif wewnetrzne[x] == 'BM':
             if wewnetrzne[x + 9] == 'WM' and wewnetrzne[x + 18] == 'n':
                             wewnetrzne[x] = 'n'
@@ -300,7 +302,7 @@ def wiecej_bic_for_one(bigVector, wewnetrzne,x):
             del wewnetrzne[:]
     elif wewnetrzne[x] == 'BM' and (
             x == 56 or x == 58 or x == 60 or x == 62 or x == 49 or x == 51 or x == 53 or x == 55):
-        print()
+        pass
     elif wewnetrzne[x] == 'BM':
         if wewnetrzne[x + 9] == 'WM' and wewnetrzne[x + 18] == 'n' and wewnetrzne[x + 7] == 'WM' and wewnetrzne[x + 14] == 'n':
             wewnetrzne2 = wewnetrzne [:]
@@ -378,15 +380,7 @@ def mozliwe_bicia_dla_bialych(chessboard, bigVector, drugalista):
             zaszly_zmiany = 0
 
         if wewnetrzne[x] == 'WM' and (x == 56 or x == 40 or x == 24 or x == 49 or x == 33 or x == 17):
-            if wewnetrzne[x - 7] == 'BM' and wewnetrzne[x - 14] == 'n':
-                        wewnetrzne[x] = 'n'
-                        wewnetrzne[x - 7] = 'n'
-                        wewnetrzne[x-14] = 'WM'
-                        zaszly_zmiany = 1
-                        wiecej_bic_for_one_dla_bialych(drugalista, wewnetrzne,x-14)
-                        bigVector.append(wewnetrzne.copy())
-                        del wewnetrzne[:]
-            if wewnetrzne[x - 7] == 'BK' and wewnetrzne[x - 14] == 'n':
+            if wewnetrzne[x - 7] == 'BM' or (wewnetrzne[x - 7] == 'BK') and wewnetrzne[x - 14] == 'n':
                         wewnetrzne[x] = 'n'
                         wewnetrzne[x - 7] = 'n'
                         wewnetrzne[x-14] = 'WM'
@@ -395,7 +389,7 @@ def mozliwe_bicia_dla_bialych(chessboard, bigVector, drugalista):
                         bigVector.append(wewnetrzne.copy())
                         del wewnetrzne[:]
         elif wewnetrzne[x] == 'WM' and (x == 62 or x == 55 or x == 46 or x==39 or x==30 or x==23):
-            if wewnetrzne[x - 9] == 'BM' and wewnetrzne[x - 18] == 'n':
+            if (wewnetrzne[x - 9] == 'BM' or wewnetrzne[x-9]=='BK') and wewnetrzne[x - 18] == 'n':
                         wewnetrzne[x] = 'n'
                         wewnetrzne[x - 9] = 'n'
                         wewnetrzne[x-18]='WM'
@@ -403,18 +397,11 @@ def mozliwe_bicia_dla_bialych(chessboard, bigVector, drugalista):
                         wiecej_bic_for_one_dla_bialych(drugalista, wewnetrzne, x - 18)
                         del wewnetrzne[:]
                         zaszly_zmiany = 1
-            if wewnetrzne[x - 9] == 'BK' and wewnetrzne[x - 18] == 'n':
-                wewnetrzne[x] = 'n'
-                wewnetrzne[x - 9] = 'n'
-                wewnetrzne[x - 18] = 'WM'
-                bigVector.append(wewnetrzne.copy())
-                wiecej_bic_for_one_dla_bialych(drugalista, wewnetrzne, x - 18)
-                del wewnetrzne[:]
-                zaszly_zmiany = 1
+
         elif wewnetrzne[x] == 'WM' and (x == 1 or x == 3 or x == 5 or x == 7 or x== 8 or x==10 or x==12 or x ==14):
-            print()
+            pass
         elif wewnetrzne[x] == 'WM':
-            if wewnetrzne[x - 9] == 'BM' and wewnetrzne[x - 18] == 'n':
+            if wewnetrzne[x - 9] == 'BM' or (wewnetrzne[x - 9] == 'BK') and wewnetrzne[x - 18] == 'n':
                             wewnetrzne[x] = 'n'
                             wewnetrzne[x - 9] = 'n'
                             wewnetrzne[x - 18] = 'WM'
@@ -423,16 +410,7 @@ def mozliwe_bicia_dla_bialych(chessboard, bigVector, drugalista):
                             del wewnetrzne[:]
                             for z in range(64):
                                 wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
-            elif wewnetrzne[x - 9] == 'BK' and wewnetrzne[x - 18] == 'n':
-                            wewnetrzne[x] = 'n'
-                            wewnetrzne[x - 9] = 'n'
-                            wewnetrzne[x - 18] = 'WM'
-                            bigVector.append(wewnetrzne.copy())
-                            wiecej_bic_for_one_dla_bialych(drugalista, wewnetrzne, x - 18)
-                            del wewnetrzne[:]
-                            for z in range(64):
-                                wewnetrzne.append(chessboard.gameTiles[z].pieceOnTile.toString())
-            if wewnetrzne[x] == 'WM' and wewnetrzne[x - 7] == 'BM' and wewnetrzne[x - 14] == 'n':
+            if wewnetrzne[x] == 'WM' and (wewnetrzne[x - 7] == 'BM' or wewnetrzne[x - 7] == 'BK') and wewnetrzne[x - 14] == 'n':
                             wewnetrzne[x] = 'n'
                             wewnetrzne[x - 7] = 'n'
                             wewnetrzne[x - 14] = 'WM'
@@ -441,14 +419,6 @@ def mozliwe_bicia_dla_bialych(chessboard, bigVector, drugalista):
                             del wewnetrzne[:]
                             zaszly_zmiany = 1
 
-            elif wewnetrzne[x] == 'WM' and wewnetrzne[x - 7] == 'BK' and wewnetrzne[x - 14] == 'n':
-                wewnetrzne[x] = 'n'
-                wewnetrzne[x - 7] = 'n'
-                wewnetrzne[x - 14] = 'WM'
-                wiecej_bic_for_one_dla_bialych(drugalista, wewnetrzne, x - 14)
-                bigVector.append(wewnetrzne.copy())
-                del wewnetrzne[:]
-                zaszly_zmiany = 1
 def wiecej_bic_for_one_dla_bialych(bigVector, wewnetrzne,x):
     if wewnetrzne[x] == 'WM' and (x == 24 or x == 40 or x == 56 or x == 49 or x == 33 or x == 17):
         if wewnetrzne[x - 7] == 'BM' and wewnetrzne[x - 14] == 'n':
@@ -482,7 +452,7 @@ def wiecej_bic_for_one_dla_bialych(bigVector, wewnetrzne,x):
             del wewnetrzne[:]
     elif wewnetrzne[x] == 'WM' and (
             x == 1 or x == 3 or x == 5 or x == 7 or x == 8 or x == 10 or x == 12 or x == 14):
-        print()
+        pass
     elif wewnetrzne[x] == 'WM':
         if wewnetrzne[x - 9] == 'BM' and wewnetrzne[x - 18] == 'n' and wewnetrzne[x - 7] == 'BM' and wewnetrzne[x - 14] == 'n':
             wewnetrzne2 = wewnetrzne [:]
