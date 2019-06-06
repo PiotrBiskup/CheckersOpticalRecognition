@@ -19,8 +19,11 @@ chessboard = Board()
 chessboard.createBoard()
 # chessboard.printBoard()
 ruchy = []
-bicia =[]
+ruchycz = []
+bicia = []
+biciacz =[]
 wielokrotne =[]
+wielokrotnecz = []
 allTiles = []
 allPieces = []
 currentTiles = []
@@ -95,7 +98,7 @@ def newBoard(lastMove):
 
 #need to check that...
 def SeeMove(currentTiles):
-        see = logic.Komunikaty(currentTiles,ruchy,bicia,wielokrotne)
+        see = logic.Komunikaty(currentTiles,ruchy,ruchycz, bicia,biciacz, wielokrotne, wielokrotnecz)
         if (see == 1):
             print("1")
             correct = True
@@ -192,9 +195,16 @@ bigVector=[]
 # for x in range(64):
 #     chessboard.gameTiles[x] = Tile(x, NullPiece())
 # print("\n")
-# chessboard.gameTiles[8] = Tile(8, King("Black", 8))
-# # chessboard.gameTiles[56] = Tile(56, King("Black", 56))
-
+#
+# chessboard.gameTiles[17] = Tile(17, Man("Black",17))
+# chessboard.gameTiles[26] = Tile(26,King("White", 26))
+# logic.Generator_czarnych(chessboard,ruchycz,biciacz,wielokrotnecz)
+# logic.Generator_bialych(chessboard,ruchy,bicia,wielokrotne)
+# print()
+# chessboard.gameTiles[17] = Tile(17, NullPiece())
+# chessboard.gameTiles[24] = Tile(24, Man("Black",24))
+# chessboard.gameTiles[26] = Tile(26,King("White", 26))
+# SeeMove(chessboard)
 #chessboard.gameTiles[44] = Tile(44, King("Black", 44))
 #chessboard.gameTiles[35] = Tile(35, King("White", 35))
 #chessboard.gameTiles[17] = Tile(17, King("White", 17))
@@ -327,7 +337,7 @@ while not quitGame:
                         move_counter += 1
                         print(str(move_counter) + " ==================================RUCH===========================")
                         # logic.Generator_bialych(chessboard,ruchy,bicia,wielokrotne)
-                        # logic.Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
+                        # logic.Generator_czarnych(chessboard,ruchycz,biciacz,wielokrotnecz)
                         currentTiles = prev.copy()
                         #newBoard("Black")
 

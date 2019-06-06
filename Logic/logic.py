@@ -47,67 +47,67 @@ def Compare(chessboard, bigVector):                                          #mn
     return False
 
 def Komunikaty(chessboard,ruchy, ruchycz, bicia, biciacz, wielokrotne, wielokrotnecz):
-    #tocompare = []
-    # for z in range(64):
-    #     tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
+    tocompare = []
+    for z in range(64):
+         tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
     biale = True
 
     for y in wielokrotnecz:
-        if y==chessboard:
+        if y==tocompare:
             biale=False
-            continue
+            break
     for y in ruchycz:
-        if y==chessboard:
+        if y==tocompare:
             biale=False
-            continue
+            break
     for y in biciacz:
-        if y==chessboard:
+        if y==tocompare:
             biale=False
-            continue
+            break
     if biale == True:
         for y in wielokrotne:
-            if y==chessboard:
+            if y==tocompare:
                 return 1            #jezeli jest wielokrotne bicie to git, nie ma nawet co wywalic
         for y in bicia:
-            if y==chessboard and not wielokrotne:
+            if y==tocompare and not wielokrotne:
                 return 1             #jezeli jest bicie, a wielokrotnego nie ma, to git
-            elif y==chessboard:
+            elif y==tocompare:
                 return 2            #jak jest bicie, ale mogloby byc wielokrotne, to nie git :/
         for y in ruchy:
-            if y==chessboard and ((not wielokrotne) or (not bicia)):
+            if y==tocompare and ((not wielokrotne) and (not bicia)):
                 return 1  #git
-            if y==chessboard and not bicia:
+            if y==tocompare and not bicia:
                 return 1
-            elif y==chessboard:
+            elif y==tocompare:
                 return 3             #mozliwe bicie jakiekolwiek, nie git
-        #Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
-        #Generator_bialych(chessboard, ruchy, bicia, wielokrotne)
+        #Generator_czarnych(tocompare,ruchy,bicia,wielokrotne)
+        #Generator_bialych(tocompare, ruchy, bicia, wielokrotne)
         return 4           #jak nie znalezlismy, to walic to
     else:
         for y in wielokrotnecz:
-            if y == chessboard:
+            if y == tocompare:
                 return 1  # jezeli jest wielokrotne bicie to git, nie ma nawet co wywalic
         for y in biciacz:
-            if y == chessboard and not wielokrotnecz:
+            if y == tocompare and not wielokrotnecz:
                 return 1  # jezeli jest bicie, a wielokrotnego nie ma, to git
-            elif y == chessboard:
+            elif y == tocompare:
                 return 2  # jak jest bicie, ale mogloby byc wielokrotne, to nie git :/
         for y in ruchycz:
-            if y == chessboard and ((not wielokrotnecz) or (not biciacz)):
+            if y == tocompare and ((not wielokrotnecz) and (not biciacz)):
                 return 1  # git
-            if y == chessboard and not biciacz:
+            if y == tocompare and not biciacz:
                 return 1
-            elif y == chessboard:
+            elif y == tocompare:
                 return 3  # mozliwe bicie jakiekolwiek, nie git
             # Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
             # Generator_bialych(chessboard, ruchy, bicia, wielokrotne)
         return 4  # jak nie znalezlismy, to walic to
 
 def Generator_bialych(chessboard, ruchy, bicia, wielokrotne):
-    tocompare=[]
-    for z in range(64):
-         tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
-    ruchy.append(tocompare)
+    # tocompare=[]
+    # for z in range(64):
+    #      tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
+    # ruchy.append(tocompare)
     ruchy_bialych(chessboard,ruchy)
     mozliwe_bicia_dla_bialych(chessboard,bicia,wielokrotne)
     mozliwe_ruchy_dla_bialej_damy(ruchy,chessboard)
@@ -115,10 +115,10 @@ def Generator_bialych(chessboard, ruchy, bicia, wielokrotne):
     zamien_na_damki_biale(ruchy,bicia,wielokrotne)
 
 def Generator_czarnych(chessboard, ruchy, bicia, wielokrotne):
-    tocompare=[]
-    for z in range(64):
-        tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
-    ruchy.append(tocompare)
+    # tocompare=[]
+    # for z in range(64):
+    #     tocompare.append(chessboard.gameTiles[z].pieceOnTile.toString())
+    # ruchy.append(tocompare)
     mozliwy_ruch(chessboard,ruchy)
     mozliwe_bicia(chessboard,bicia,wielokrotne)
     mozliwe_ruchy_dla_czarnej_damy(ruchy,chessboard)
