@@ -169,7 +169,7 @@ def find_checkers(image):
     gray_img = cv2.cvtColor(blurred_img, cv2.COLOR_BGR2GRAY)
 
     circles = cv2.HoughCircles(gray_img, cv2.HOUGH_GRADIENT, 1, 40, param1=35, param2=25, minRadius=29,
-                               maxRadius=42)  # 1,40,35,22,25,35
+                               maxRadius=43)  # 1,40,35,22,25,35
 
     if circles is not None:
         circles = np.uint16(np.around(circles))
@@ -232,16 +232,16 @@ def find_colored_checkers(image, checkers, squares):
     cv2.imshow('w', mask_white)
 
     mask_pink = cv2.inRange(hsv, lower_pink, upper_pink)
-    erosion_pink = cv2.erode(mask_pink, kernel_color, iterations=1)
-    dilation_pink = cv2.dilate(erosion_pink, kernel, iterations=1)
+    # erosion_pink = cv2.erode(mask_pink, kernel_color, iterations=1)
+    dilation_pink = cv2.dilate(mask_pink, kernel, iterations=1)
 
-    # cv2.imshow('p', dilation_pink)
+    cv2.imshow('p', dilation_pink)
 
     mask_green = cv2.inRange(hsv, lower_dark_green, upper_dark_green)
-    erosion_green = cv2.erode(mask_green, kernel_color, iterations=1)
-    dilation_green = cv2.dilate(erosion_green, kernel, iterations=1)
+    # erosion_green = cv2.erode(mask_green, kernel_color, iterations=1)
+    dilation_green = cv2.dilate(mask_green, kernel, iterations=1)
 
-    # cv2.imshow('g', dilation_green)
+    cv2.imshow('g', dilation_green)
 
     for checker in checkers:
         x1 = checker[0] - 15
@@ -352,7 +352,7 @@ def choose_most_common_set(first_8_frames):
 
     maximum = max(amounts)
 
-    return first_8_frames[amounts.index(maximum)]
+    return first_8_frames[amounts.index(maximum)], maximum
 
 
 

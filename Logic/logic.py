@@ -605,6 +605,42 @@ def mozliwe_ruchy_dla_czarnej_damy(bigVector,chessboard):
                     bigVector.append(wewnetrzne.copy())
                     del wewnetrzne[:]
                     zaszly_zmiany = 1
+            elif x == 1 or x == 3 or x == 5:
+                if chessboard[x + 9] == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 9] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard[z])
+                if chessboard[x + 7] == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x + 7] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    zaszly_zmiany = 1
+            elif x == 62 or x == 60 or x == 58:
+                if chessboard[x - 9] == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 9] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard[z])
+                if chessboard[x - 7] == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 7] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    zaszly_zmiany = 1
+            elif x == 56:
+                if chessboard[x - 7] == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 7] = 'BK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    zaszly_zmiany = 1
+
 
             else:
                 if chessboard[x + 9] == 'n':
@@ -702,6 +738,27 @@ def mozliwe_ruchy_dla_bialej_damy(bigVector,chessboard):
                 if chessboard[x + 7] == 'n':
                     wewnetrzne[x] = 'n'
                     wewnetrzne[x + 7] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    zaszly_zmiany = 1
+            elif x == 62 or x == 60 or x == 58:
+                if chessboard[x - 9] == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 9] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    for z in range(64):
+                        wewnetrzne.append(chessboard[z])
+                if chessboard[x - 7] == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 7] = 'WK'
+                    bigVector.append(wewnetrzne.copy())
+                    del wewnetrzne[:]
+                    zaszly_zmiany = 1
+            elif x == 56:
+                if chessboard[x - 7] == 'n':
+                    wewnetrzne[x] = 'n'
+                    wewnetrzne[x - 7] = 'WK'
                     bigVector.append(wewnetrzne.copy())
                     del wewnetrzne[:]
                     zaszly_zmiany = 1

@@ -308,7 +308,7 @@ while not quitGame:
                     first_frame += 1
 
                 elif first_frame == 8:
-                    previous = cr.choose_most_common_set(first_8_frames)[:]
+                    previous, not_needed = cr.choose_most_common_set(first_8_frames)[:]
                     currentTiles = previous[:]
                     newBoard('White')
                     drawPieces()
@@ -324,16 +324,16 @@ while not quitGame:
                         counter_after_set_changed += 1
 
                     if counter_after_set_changed == 8:
-                        tempMostCommon = cr.choose_most_common_set(frames_afer_previous)[:]
+                        tempMostCommon, tempMaximum = cr.choose_most_common_set(frames_afer_previous)[:]
 
-                        if tempMostCommon != previous:
+                        if tempMostCommon != previous and tempMaximum > 6:
                             # tutaj robimy ruch
                             logic.Generator_bialych(previous,ruchy,bicia,wielokrotne)
                             logic.Generator_czarnych(previous,ruchycz,biciacz,wielokrotnecz)
 
                             previous.clear()
-                            previous = tempMostCommon[:]
-                            currentTiles = tempMostCommon[:]
+                            previous = tempMostCommon.copy()
+                            currentTiles = tempMostCommon.copy()
                             moveCounter += 1
                             print(str(moveCounter) + ': ====================RUCH======================================')
 
@@ -343,6 +343,13 @@ while not quitGame:
                                 correct, message = SeeMove(currentTiles)
                             else:
                                 correct, message = GoBack(currentTiles)
+
+                            ruchy.clear()
+                            ruchycz.clear()
+                            bicia.clear()
+                            biciacz.clear()
+                            wielokrotnecz.clear()
+                            wielokrotne.clear()
 
 
                         frames_afer_previous.clear()
