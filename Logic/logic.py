@@ -289,7 +289,7 @@ def mozliwe_bicia(chessboard, bigVector, drugalista):
                             del wewnetrzne[:]
                             for z in range(64):
                                 wewnetrzne.append(chessboard[z])
-            if wewnetrzne[x] == 'BM' and wewnetrzne[x + 7] == 'WM' and wewnetrzne[x + 14] == 'n':
+            if wewnetrzne[x] == 'BM' and (wewnetrzne[x + 7] == 'WM' or wewnetrzne[x + 7] == 'WK') and wewnetrzne[x + 14] == 'n':
                             wewnetrzne[x] = 'n'
                             wewnetrzne[x + 7] = 'n'
                             wewnetrzne[x + 14] = 'BM'
@@ -297,24 +297,10 @@ def mozliwe_bicia(chessboard, bigVector, drugalista):
                             bigVector.append(wewnetrzne.copy())
                             del wewnetrzne[:]
                             zaszly_zmiany = 1
-            elif wewnetrzne[x] == 'BM' and wewnetrzne[x + 7] == 'WK' and wewnetrzne[x + 14] == 'n':
-                            wewnetrzne[x] = 'n'
-                            wewnetrzne[x + 7] = 'n'
-                            wewnetrzne[x + 14] = 'BM'
-                            wiecej_bic_for_one(drugalista, wewnetrzne, x + 14)
-                            bigVector.append(wewnetrzne.copy())
-                            del wewnetrzne[:]
-                            zaszly_zmiany = 1
+
 def wiecej_bic_for_one(bigVector, wewnetrzne,x):
     if wewnetrzne[x] == 'BM' and (x == 7 or x == 23 or x == 39 or x == 14 or x == 30 or x == 46):
-        if wewnetrzne[x + 7] == 'WM' and wewnetrzne[x + 14] == 'n':
-            wewnetrzne[x] = 'n'
-            wewnetrzne[x + 7] = 'n'
-            wewnetrzne[x + 14] = 'BM'
-            wiecej_bic_for_one(bigVector, wewnetrzne, x + 14)
-            bigVector.append(wewnetrzne.copy())
-            del wewnetrzne[:]
-        if wewnetrzne[x + 7] == 'WK' and wewnetrzne[x + 14] == 'n':
+        if (wewnetrzne[x + 7] == 'WM' or wewnetrzne[x + 7] == 'WK') and wewnetrzne[x + 14] == 'n':
             wewnetrzne[x] = 'n'
             wewnetrzne[x + 7] = 'n'
             wewnetrzne[x + 14] = 'BM'
@@ -322,14 +308,7 @@ def wiecej_bic_for_one(bigVector, wewnetrzne,x):
             bigVector.append(wewnetrzne.copy())
             del wewnetrzne[:]
     elif wewnetrzne[x] == 'BM' and (x == 8 or x == 24 or x == 40 or x == 1 or x == 17 or x == 33):
-        if wewnetrzne[x + 9] == 'WM' and wewnetrzne[x + 18] == 'n':
-            wewnetrzne[x] = 'n'
-            wewnetrzne[x + 9] = 'n'
-            wewnetrzne[x + 18] = 'BM'
-            wiecej_bic_for_one(bigVector, wewnetrzne, x + 18)
-            bigVector.append(wewnetrzne.copy())
-            del wewnetrzne[:]
-        if wewnetrzne[x + 9] == 'WK' and wewnetrzne[x + 18] == 'n':
+        if (wewnetrzne[x + 9] == 'WM' or wewnetrzne[x + 9] == 'WK')  and wewnetrzne[x + 18] == 'n':
             wewnetrzne[x] = 'n'
             wewnetrzne[x + 9] = 'n'
             wewnetrzne[x + 18] = 'BM'
@@ -457,14 +436,7 @@ def mozliwe_bicia_dla_bialych(chessboard, bigVector, drugalista):
 
 def wiecej_bic_for_one_dla_bialych(bigVector, wewnetrzne,x):
     if wewnetrzne[x] == 'WM' and (x == 24 or x == 40 or x == 56 or x == 49 or x == 33 or x == 17):
-        if wewnetrzne[x - 7] == 'BM' and wewnetrzne[x - 14] == 'n':
-            wewnetrzne[x] = 'n'
-            wewnetrzne[x - 7] = 'n'
-            wewnetrzne[x - 14] = 'WM'
-            wiecej_bic_for_one(bigVector, wewnetrzne, x - 14)
-            bigVector.append(wewnetrzne.copy())
-            del wewnetrzne[:]
-        if wewnetrzne[x - 7] == 'BK' and wewnetrzne[x - 14] == 'n':
+        if (wewnetrzne[x - 7] == 'BM' or wewnetrzne[x - 7] == 'BK') or  and wewnetrzne[x - 14] == 'n':
             wewnetrzne[x] = 'n'
             wewnetrzne[x - 7] = 'n'
             wewnetrzne[x - 14] = 'WM'
@@ -472,14 +444,7 @@ def wiecej_bic_for_one_dla_bialych(bigVector, wewnetrzne,x):
             bigVector.append(wewnetrzne.copy())
             del wewnetrzne[:]
     elif wewnetrzne[x] == 'WM' and (x == 62 or x == 55 or x == 46 or x == 39 or x == 30 or x == 23):
-        if wewnetrzne[x - 9] == 'BM' and wewnetrzne[x - 18] == 'n':
-            wewnetrzne[x] = 'n'
-            wewnetrzne[x - 9] = 'n'
-            wewnetrzne[x - 18] = 'WM'
-            wiecej_bic_for_one(bigVector, wewnetrzne, x - 18)
-            bigVector.append(wewnetrzne.copy())
-            del wewnetrzne[:]
-        if wewnetrzne[x - 9] == 'BK' and wewnetrzne[x - 18] == 'n':
+        if (wewnetrzne[x - 9] == 'BM' or wewnetrzne[x - 9] == 'BK') and wewnetrzne[x - 18] == 'n':
             wewnetrzne[x] = 'n'
             wewnetrzne[x - 9] = 'n'
             wewnetrzne[x - 18] = 'WM'
