@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-lower_white = np.array([0, 0, 200])  # 0,0,200   5,100,100 , 0,0,200 - bardzo czule
+lower_white = np.array([0, 0, 150])  # 0,0,200   5,100,100 , 0,0,200 - bardzo czule
 upper_white = np.array([180, 50, 255])  # 180,50,255  25,255,255 - 180, 255, 255
 
 lower_pink = np.array([160, 100, 100])
@@ -10,19 +10,21 @@ upper_pink = np.array([179, 255, 255])
 lower_dark_green = np.array([50, 60, 60])
 upper_dark_green = np.array([80, 255, 255])
 
-lower_yellow = np.array([20, 100, 100])
-upper_yellow = np.array([50, 255, 255])
+lower_yellow = np.array([20, 100, 100])  # lower_yellow = np.array([20, 100, 100])
+upper_yellow = np.array([100, 255, 255])  # upper_yellow = np.array([50, 255, 255])
 
-lower_blue = np.array([84, 100, 100])  # 100,50,50  100, 70, 70     84,100,100
-upper_blue = np.array([104, 255, 255])  # 130,255,255      104,255,255
+lower_blue = np.array([74, 100, 100])  # 100,50,50  100, 70, 70     84,100,100
+upper_blue = np.array([114, 255, 255])  # 130,255,255      104,255,255
 
 
 def check_edges(hsv_image):
     mask = cv2.inRange(hsv_image, lower_yellow, upper_yellow)
-    kernel = np.ones((10, 10), np.uint8)
-    erosion = cv2.erode(mask, kernel, iterations=1)
-    dilation = cv2.dilate(erosion, kernel, iterations=1)
-    # cv2.imshow('zolete', dilation)
+    kernel_er = np.ones((6, 6), np.uint8)
+    kernel_dil = np.ones((30, 30), np.uint8)
+    erosion = cv2.erode(mask, kernel_er, iterations=1)
+    dilation = cv2.dilate(erosion, kernel_dil, iterations=1)
+    cv2.imshow('zolete', dilation)
+    cv2.imshow('zoltemaksa', mask)
 
     image, contours, hierarchy = cv2.findContours(dilation, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     img2 = cv2.drawContours(image, contours, -1, (128, 255, 187), 3)
@@ -96,7 +98,7 @@ def board_perspective_transform(source_image):
     # cv2.waitKey(0)
 
     # usuniecie zle wykrytych pojdynczych pikseli
-    kernel = np.ones((10, 10), np.uint8)
+    kernel = np.ones((8, 8), np.uint8)
     erosion = cv2.erode(mask, kernel, iterations=1)
 
     #cv2.imshow('ed', erosion)
@@ -104,7 +106,7 @@ def board_perspective_transform(source_image):
 
     dilation = cv2.dilate(erosion, kernel, iterations=1)
 
-    # cv2.imshow('rogi', dilation)
+    cv2.imshow('rogi', dilation)
     # cv2.waitKey(0)
 
     # znalezienie konturow
@@ -166,8 +168,8 @@ def find_checkers(image):
     blurred_img = cv2.medianBlur(image, 7)
     gray_img = cv2.cvtColor(blurred_img, cv2.COLOR_BGR2GRAY)
 
-    circles = cv2.HoughCircles(gray_img, cv2.HOUGH_GRADIENT, 1, 40, param1=37, param2=22, minRadius=29,
-                               maxRadius=40)  # 1,40,35,22,25,35
+    circles = cv2.HoughCircles(gray_img, cv2.HOUGH_GRADIENT, 1, 40, param1=35, param2=25, minRadius=29,
+                               maxRadius=42)  # 1,40,35,22,25,35
 
     if circles is not None:
         circles = np.uint16(np.around(circles))
@@ -220,14 +222,14 @@ def find_colored_checkers(image, checkers, squares):
 
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-    kernel = np.ones((20, 20), np.uint8)
+    kernel = np.ones((12, 12), np.uint8)
     kernel_color = np.ones((12, 12), np.uint8)
 
     mask_white = cv2.inRange(hsv, lower_white, upper_white)
     erosion_white = cv2.erode(mask_white, kernel, iterations=1)
     dilation_white = cv2.dilate(erosion_white, kernel, iterations=1)
 
-    # cv2.imshow('w', dilation_white)
+    cv2.imshow('w', mask_white)
 
     mask_pink = cv2.inRange(hsv, lower_pink, upper_pink)
     erosion_pink = cv2.erode(mask_pink, kernel_color, iterations=1)
@@ -321,16 +323,42 @@ def run_all(img):
         return None, None
 
 
-def check_if_was_move(source, list_of_eight_after_source):
-    cnt = 0
-    for x in list_of_eight_after_source:
-        if x == source:
-            cnt += 1
+# def check_if_was_move(source, list_of_eight_after_source):
+#     cnt = 0
+#     for x in list_of_eight_after_source:
+#         if x == source:
+#             cnt += 1
+#
+#     if cnt > 4:
+#         return True
+#     else:
+#         return False
 
-    if cnt > 3:
-        return True
-    else:
-        return False
+
+def choose_most_common_set(first_8_frames):
+
+    amounts = []
+
+    for x in first_8_frames:
+
+        counter = 0
+
+        for y in first_8_frames:
+
+            if x == y:
+                counter += 1
+
+        amounts.append(counter)
+
+    maximum = max(amounts)
+
+    return first_8_frames[amounts.index(maximum)]
+
+
+
+
+
+
 
 
 # cap = cv2.VideoCapture(4)

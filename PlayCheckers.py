@@ -275,18 +275,18 @@ n = 0
 
 #Przetwarzanie obrazu
 
-cap = cv2.VideoCapture(4)
+cap = cv2.VideoCapture(5)
+tab = []
+first_frame = 0
+first_8_frames = []
+previous = []
+counter_after_set_changed = 0
+frames_afer_previous = []
+moveCounter = 0
 
-move_counter = 0
-counter = 0
-avoid_first_frame = 1
-prev = []
-list_of_eight_prev = []
 
 
 while not quitGame:
-    # if n==0:
-    #     time.sleep(7)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quitGame = True
@@ -296,55 +296,42 @@ while not quitGame:
     if cap.isOpened():
         ret, frame = cap.read()
         cv2.imshow("frame0", frame)
+        tab = []
+        tab, img_transf = cr.run_all(frame)
         if ret:
-            tab, img_transf = cr.run_all(frame)
-            # cv2.imshow('frame', frame)
             if tab is not None and img_transf is not None:
-                # cv2.imshow('lol', img_transf)
-                if avoid_first_frame == 1:
+                if first_frame < 8:
+                    first_8_frames.append(tab)
+                    first_frame += 1
 
-                    prev = tab
-                    currentTiles = tab
-                    newBoard("White")
+                elif first_frame == 8:
+                    previous = cr.choose_most_common_set(first_8_frames)[:]
+                    currentTiles = previous[:]
+                    newBoard('White')
                     drawPieces()
-                    avoid_first_frame += 1
+                    first_frame += 1
 
                 else:
-                    if prev != tab:
-                        if counter == 0:
-                            prev = tab
-                            counter += 1
-                        else:
-                            list_of_eight_prev.append(tab)
-                            counter += 1
-                    else:
-                        if counter > 0:
-                            list_of_eight_prev.append(tab)
-                            counter += 1
 
-                if counter == 8:
-                    if cr.check_if_was_move(prev, list_of_eight_prev):
-                        move_counter += 1
-                        print(str(move_counter) + " ==================================RUCH===========================")
-                        # logic.Generator_bialych(chessboard,ruchy,bicia,wielokrotne)
-                        # logic.Generator_czarnych(chessboard,ruchy,bicia,wielokrotne)
-                        currentTiles = prev.copy()
-                        #newBoard("Black")
+                    if tab != previous and counter_after_set_changed < 8:
+                        frames_afer_previous.append(tab)
+                        counter_after_set_changed += 1
+                    elif tab == previous and counter_after_set_changed > 0:
+                        frames_afer_previous.append(tab)
+                        counter_after_set_changed += 1
 
-                        if correct:
-                            correct, message = SeeMove(currentTiles)
-                        else:
-                            correct, message = GoBack(currentTiles)
+                    if counter_after_set_changed == 8:
+                        tempMostCommon = cr.choose_most_common_set(frames_afer_previous)[:]
 
-                        counter = 0
-                        list_of_eight_prev = []
-                        # prev = tab
-                    else:
-                        counter = 0
-                        list_of_eight_prev = []
-                        prev = tab
+                        if tempMostCommon != previous:
+                            # tutaj robimy ruch
+                            previous.clear()
+                            previous = tempMostCommon[:]
+                            moveCounter += 1
+                            print(str(moveCounter) + ': ====================RUCH======================================')
 
-
+                        frames_afer_previous.clear()
+                        counter_after_set_changed = 0
 
     gameDisplay.fill((128,128,128))
     drawPieces()
@@ -354,7 +341,6 @@ while not quitGame:
     textW = font.render(wMessage, True, (0, 128, 0))
     bMessage = "B: " + str(PointsB)
     textB = font.render(bMessage, True, (0, 128, 0))
-
 
     font = pygame.font.SysFont("arial", 30)
     text = font.render(message, True, (0, 128, 0))
