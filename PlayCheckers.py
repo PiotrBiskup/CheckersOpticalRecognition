@@ -18,6 +18,9 @@ clock = pygame.time.Clock()
 chessboard = Board()
 chessboard.createBoard()
 # chessboard.printBoard()
+ruchycz = []
+biciacz = []
+wielokrotnecz =[]
 ruchy = []
 bicia =[]
 wielokrotne =[]
@@ -95,7 +98,7 @@ def newBoard(lastMove):
 
 #need to check that...
 def SeeMove(currentTiles):
-        see = logic.Komunikaty(currentTiles,ruchy,bicia,wielokrotne)
+        see = logic.Komunikaty(currentTiles,ruchy,ruchycz,bicia,biciacz,wielokrotne,wielokrotnecz)
         if (see == 1):
             print("1")
             correct = True
@@ -325,10 +328,22 @@ while not quitGame:
 
                         if tempMostCommon != previous:
                             # tutaj robimy ruch
+                            logic.Generator_bialych(previous,ruchy,bicia,wielokrotne)
+                            logic.Generator_czarnych(previous,ruchycz,biciacz,wielokrotnecz)
+
                             previous.clear()
                             previous = tempMostCommon[:]
+                            currentTiles = tempMostCommon[:]
                             moveCounter += 1
                             print(str(moveCounter) + ': ====================RUCH======================================')
+
+                            # print(logic.Komunikaty(previous, ruchy,ruchycz,bicia,biciacz,wielokrotne,wielokrotnecz))
+
+                            if correct:
+                                correct, message = SeeMove(currentTiles)
+                            else:
+                                correct, message = GoBack(currentTiles)
+
 
                         frames_afer_previous.clear()
                         counter_after_set_changed = 0
