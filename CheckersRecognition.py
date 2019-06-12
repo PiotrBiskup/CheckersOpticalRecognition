@@ -23,8 +23,8 @@ def check_edges(hsv_image):
     kernel_dil = np.ones((30, 30), np.uint8)
     erosion = cv2.erode(mask, kernel_er, iterations=1)
     dilation = cv2.dilate(erosion, kernel_dil, iterations=1)
-    cv2.imshow('zolete', dilation)
-    cv2.imshow('zoltemaksa', mask)
+    # cv2.imshow('zolete', dilation)
+    # cv2.imshow('zoltemaksa', mask)
 
     image, contours, hierarchy = cv2.findContours(dilation, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     img2 = cv2.drawContours(image, contours, -1, (128, 255, 187), 3)
@@ -106,7 +106,7 @@ def board_perspective_transform(source_image):
 
     dilation = cv2.dilate(erosion, kernel, iterations=1)
 
-    cv2.imshow('rogi', dilation)
+    # cv2.imshow('rogi', dilation)
     # cv2.waitKey(0)
 
     # znalezienie konturow
@@ -169,7 +169,7 @@ def find_checkers(image):
     gray_img = cv2.cvtColor(blurred_img, cv2.COLOR_BGR2GRAY)
 
     circles = cv2.HoughCircles(gray_img, cv2.HOUGH_GRADIENT, 1, 40, param1=35, param2=25, minRadius=29,
-                               maxRadius=43)  # 1,40,35,22,25,35
+                               maxRadius=45)  # 1,40,35,22,25,35
 
     if circles is not None:
         circles = np.uint16(np.around(circles))
@@ -185,7 +185,8 @@ def find_checkers(image):
             # draw the center of the circle
             cv2.circle(img_circles, (i[0], i[1]), 2, (0, 0, 255), 3)
 
-        cv2.imshow('obrazek', img_circles)
+        small = cv2.resize(img_circles, (0, 0), fx=0.8, fy=0.8)
+        cv2.imshow('Wykryte_pionki', small)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
@@ -223,25 +224,26 @@ def find_colored_checkers(image, checkers, squares):
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
     kernel = np.ones((12, 12), np.uint8)
+    kernel_damka = np.ones((16, 16), np.uint8)
     kernel_color = np.ones((12, 12), np.uint8)
 
     mask_white = cv2.inRange(hsv, lower_white, upper_white)
     erosion_white = cv2.erode(mask_white, kernel, iterations=1)
     dilation_white = cv2.dilate(erosion_white, kernel, iterations=1)
 
-    cv2.imshow('w', mask_white)
+    # cv2.imshow('w', mask_white)
 
     mask_pink = cv2.inRange(hsv, lower_pink, upper_pink)
     # erosion_pink = cv2.erode(mask_pink, kernel_color, iterations=1)
-    dilation_pink = cv2.dilate(mask_pink, kernel, iterations=1)
+    dilation_pink = cv2.dilate(mask_pink, kernel_damka, iterations=1)
 
-    cv2.imshow('p', dilation_pink)
+    # cv2.imshow('p', dilation_pink)
 
     mask_green = cv2.inRange(hsv, lower_dark_green, upper_dark_green)
     # erosion_green = cv2.erode(mask_green, kernel_color, iterations=1)
-    dilation_green = cv2.dilate(mask_green, kernel, iterations=1)
+    dilation_green = cv2.dilate(mask_green, kernel_damka, iterations=1)
 
-    cv2.imshow('g', dilation_green)
+    # cv2.imshow('g', dilation_green)
 
     for checker in checkers:
         x1 = checker[0] - 15

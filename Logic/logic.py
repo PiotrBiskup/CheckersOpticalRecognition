@@ -9,10 +9,12 @@ def zamien_na_damki_biale(ruchy,bicia,wielokrotne):
         for x in range (1,7):
             if y[x]=='WM':
                 y[x]='WK'
+
     for y in bicia:
-        for x in range(1, 7):
-            if y[x] == 'WM':
-                y[x] = 'WK'
+        if y!=[]:
+            for x in range(1, 7):
+                if y[x] == 'WM':
+                    y[x] = 'WK'
     for y in wielokrotne:
         for x in range(1, 7):
             if y[x] == 'WM':
@@ -24,9 +26,10 @@ def zamien_na_damki_czarne(ruchy,bicia,wielokrotne):
             if y[x]=='BM':
                 y[x]='BK'
     for y in bicia:
-        for x in range(56,63):
-            if y[x] == 'BM':
-                y[x] = 'BK'
+        if y !=[]:
+            for x in range(56,63):
+                if y[x] == 'BM':
+                    y[x] = 'BK'
     for y in wielokrotne:
         for x in range(56,63):
             if y[x] == 'BM':
@@ -1226,7 +1229,7 @@ def mozliwe_bicia_dla_bialej_damy(chessboard, bigVector,drugalista):
             if (wewnetrzne[x + 9] == 'BM' or wewnetrzne[x + 9] == 'BK') and wewnetrzne[x + 18] == 'n':
                 wewnetrzne[x] = 'n'
                 wewnetrzne[x + 9] = 'n'
-                wewnetrzne[x + 18] = 'B'
+                wewnetrzne[x + 18] = 'WK'
                 bigVector.append(wewnetrzne.copy())
                 wiecej_bic_dla_bialej_damy(drugalista, wewnetrzne, x + 18)
                 del wewnetrzne[:]

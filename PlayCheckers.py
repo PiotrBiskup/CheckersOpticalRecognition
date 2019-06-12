@@ -259,7 +259,7 @@ def points():
 # drawPieces()
 
 global message
-message = "All good"
+message = "Stan początkowy"
 font = pygame.font.SysFont("arial", 30)
 text = font.render(message, True, (0, 128, 0))
 
@@ -298,7 +298,8 @@ while not quitGame:
 
     if cap.isOpened():
         ret, frame = cap.read()
-        cv2.imshow("frame0", frame)
+        small = cv2.resize(frame, (0, 0), fx=0.6, fy=0.6)
+        cv2.imshow("Obraz_oryginalny", small)
         tab = []
         tab, img_transf = cr.run_all(frame)
         if ret:
@@ -326,7 +327,7 @@ while not quitGame:
                     if counter_after_set_changed == 8:
                         tempMostCommon, tempMaximum = cr.choose_most_common_set(frames_afer_previous)[:]
 
-                        if tempMostCommon != previous and tempMaximum > 6:
+                        if tempMostCommon != previous and tempMaximum > 5:
                             # tutaj robimy ruch
                             logic.Generator_bialych(previous,ruchy,bicia,wielokrotne)
                             logic.Generator_czarnych(previous,ruchycz,biciacz,wielokrotnecz)
