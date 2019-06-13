@@ -359,6 +359,10 @@ while not quitGame:
     gameDisplay.fill((153,204,255))
     drawPieces()
     PointsB, PointsW = points()
+    if PointsW == 0:
+        message = "CZARNE WYGRAŁY!"
+    if PointsB == 0:
+        message = "BIAŁE WYGRAŁY!"
 
     wMessage = "W: " + str(PointsW)
     textW = font.render(wMessage, True, (255, 255, 255))
