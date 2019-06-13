@@ -356,24 +356,27 @@ while not quitGame:
                         frames_afer_previous.clear()
                         counter_after_set_changed = 0
 
-    gameDisplay.fill((128,128,128))
+    gameDisplay.fill((153,204,255))
     drawPieces()
     PointsB, PointsW = points()
 
     wMessage = "W: " + str(PointsW)
-    textW = font.render(wMessage, True, (0, 128, 0))
+    textW = font.render(wMessage, True, (255, 255, 255))
     bMessage = "B: " + str(PointsB)
-    textB = font.render(bMessage, True, (0, 128, 0))
+    textB = font.render(bMessage, True, (0, 0, 0))
 
     font = pygame.font.SysFont("arial", 30)
-    text = font.render(message, True, (0, 128, 0))
+    if (message == "niemozliwy ruch" or message == "zły ruch"):
+        text = font.render(message, True, (204, 0, 0))
+    else:
+        text = font.render(message, True, (0, 128, 0))
 
     gameDisplay.blit(text,
                 (300 - text.get_width() // 2, 680 - text.get_height()*1.5))
     gameDisplay.blit(textW,
-                     (5, 680 - text.get_height() * 1.5))
+                     (35, 680 - text.get_height() * 1.5))
     gameDisplay.blit(textB,
-                     (600-text.get_width()//1.5, 680 - text.get_height() * 1.5))
+                     (510, 680 - text.get_height() * 1.5))
 
 
 

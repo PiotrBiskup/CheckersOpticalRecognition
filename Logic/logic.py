@@ -436,7 +436,7 @@ def mozliwe_bicia_dla_bialych(chessboard, bigVector, drugalista):
 
 def wiecej_bic_for_one_dla_bialych(bigVector, wewnetrzne,x):
     if wewnetrzne[x] == 'WM' and (x == 24 or x == 40 or x == 56 or x == 49 or x == 33 or x == 17):
-        if (wewnetrzne[x - 7] == 'BM' or wewnetrzne[x - 7] == 'BK') or  and wewnetrzne[x - 14] == 'n':
+        if (wewnetrzne[x - 7] == 'BM' or wewnetrzne[x - 7] == 'BK')  and wewnetrzne[x - 14] == 'n':
             wewnetrzne[x] = 'n'
             wewnetrzne[x - 7] = 'n'
             wewnetrzne[x - 14] = 'WM'
