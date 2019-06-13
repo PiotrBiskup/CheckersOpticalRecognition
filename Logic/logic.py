@@ -395,7 +395,7 @@ def mozliwe_bicia_dla_bialych(chessboard, bigVector, drugalista):
             zaszly_zmiany = 0
 
         if wewnetrzne[x] == 'WM' and (x == 56 or x == 40 or x == 24 or x == 49 or x == 33 or x == 17):
-            if wewnetrzne[x - 7] == 'BM' or (wewnetrzne[x - 7] == 'BK') and wewnetrzne[x - 14] == 'n':
+            if (wewnetrzne[x - 7] == 'BM' or wewnetrzne[x - 7] == 'BK') and wewnetrzne[x - 14] == 'n':
                         wewnetrzne[x] = 'n'
                         wewnetrzne[x - 7] = 'n'
                         wewnetrzne[x-14] = 'WM'
@@ -416,7 +416,7 @@ def mozliwe_bicia_dla_bialych(chessboard, bigVector, drugalista):
         elif wewnetrzne[x] == 'WM' and (x == 1 or x == 3 or x == 5 or x == 7 or x== 8 or x==10 or x==12 or x ==14):
             pass
         elif wewnetrzne[x] == 'WM':
-            if wewnetrzne[x - 9] == 'BM' or (wewnetrzne[x - 9] == 'BK') and wewnetrzne[x - 18] == 'n':
+            if (wewnetrzne[x - 9] == 'BM' or wewnetrzne[x - 9] == 'BK') and wewnetrzne[x - 18] == 'n':
                             wewnetrzne[x] = 'n'
                             wewnetrzne[x - 9] = 'n'
                             wewnetrzne[x - 18] = 'WM'
