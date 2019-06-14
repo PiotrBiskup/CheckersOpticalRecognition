@@ -10,8 +10,10 @@ upper_pink = np.array([179, 255, 255])
 lower_dark_green = np.array([50, 60, 60])
 upper_dark_green = np.array([80, 255, 255])
 
+
 lower_yellow = np.array([20, 100, 100])  # lower_yellow = np.array([20, 100, 100])
 upper_yellow = np.array([100, 255, 255])  # upper_yellow = np.array([50, 255, 255])
+
 
 lower_blue = np.array([74, 100, 100])  # 100,50,50  100, 70, 70     84,100,100
 upper_blue = np.array([114, 255, 255])  # 130,255,255      104,255,255
@@ -19,12 +21,14 @@ upper_blue = np.array([114, 255, 255])  # 130,255,255      104,255,255
 
 def check_edges(hsv_image):
     mask = cv2.inRange(hsv_image, lower_yellow, upper_yellow)
+
     kernel_er = np.ones((6, 6), np.uint8)
     kernel_dil = np.ones((30, 30), np.uint8)
     erosion = cv2.erode(mask, kernel_er, iterations=1)
     dilation = cv2.dilate(erosion, kernel_dil, iterations=1)
     # cv2.imshow('zolete', dilation)
     # cv2.imshow('zoltemaksa', mask)
+
 
     image, contours, hierarchy = cv2.findContours(dilation, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     img2 = cv2.drawContours(image, contours, -1, (128, 255, 187), 3)
@@ -417,3 +421,4 @@ def choose_most_common_set(first_8_frames):
 #
 # cap.release()
 # cv2.destroyAllWindows()
+
